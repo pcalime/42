@@ -6,7 +6,7 @@
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/26 18:36:46 by pcalime           #+#    #+#             */
-/*   Updated: 2015/12/15 18:46:42 by pcalime          ###   ########.fr       */
+/*   Updated: 2015/12/18 19:31:04 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef	struct	s_tetrimini
 
 int				ft_counttetri(char *str);
 int				ft_checkcolonne(char *str);
-int				ft_recup(t_tetrimini **tab_piece, char *str, size_t nb_tetri);
+int				ft_recup(t_tetrimini **tab_piece, char *str, int nb_tetri);
 char			*ft_read(char *str);
 char			*ft_no_newline(char *str);
 char			**ft_split_piece(char *str);
@@ -41,12 +41,38 @@ long			ft_check(char *s);
 long			ft_recup_tetri(char *s);
 int				ft_check_tetri(long n);
 int				ft_check_tetri_1(long n);
+void			ft_create_square(int end, t_tetrimini *tab_piece);
+
+int				ft_resolve(t_tetrimini *tab_piece, char ***tab_final, int nb, int end);
+int				ft_check_piece(t_tetrimini tab_piece, char **tab_final);
+int				ft_put_all(t_tetrimini tab_piece, char ***tab_final);
+int				ft_put_piece(t_tetrimini tab_piece, char ***tab_final);
+int				ft_put_piece_2(t_tetrimini tab_piece, char ***tab_final);
+int				ft_put_piece_3(t_tetrimini tab_piece, char ***tab_final);
+int				ft_put_piece_4(t_tetrimini tab_piece, char ***tab_final);
+void			ft_remove_piece(t_tetrimini tab_piece, char ***tab_final);
+
+void			ft_affich_tab(char **tab_final);
 
 int				ft_put_square(char ***tab, t_tetrimini tab_piece);
 int				ft_put_s(char ***tab, t_tetrimini tab_piece);
 int				ft_put_vertical_s(char ***tab, t_tetrimini tab_piece);
 int				ft_put_t(char ***tab, t_tetrimini tab_piece);
 int				ft_put_reversed_s(char ***tab, t_tetrimini tab_piece);
+int				ft_put_reversed_vertical_s(char ***tab, t_tetrimini tab_piece);
+int				ft_put_reversed_l(char ***tab, t_tetrimini tab_piece);
+int				ft_put_l(char ***tab, t_tetrimini tab_piece);
+int				ft_put_gun(char ***tab, t_tetrimini tab_piece);
+int				ft_put_horiz_i(char ***tab, t_tetrimini tab_piece);
+int				ft_put_pipe(char ***tab, t_tetrimini tab_piece);
+int				ft_put_reversed_gun(char ***tab, t_tetrimini tab_piece);
+int				ft_put_right_t(char ***tab, t_tetrimini tab_piece);
+int				ft_put_vertical_pipe(char ***tab, t_tetrimini tab_piece);
+int				ft_put_reversed_pipe(char ***tab, t_tetrimini tab_piece);
+int				ft_put_i(char ***tab, t_tetrimini tab_piece);
+int				ft_put_reversed_vertical_pipe(char ***tab, t_tetrimini tab_piece);
+int				ft_put_left_t(char ***tab, t_tetrimini tab_piece);
+int				ft_put_ship(char ***tab, t_tetrimini tab_piece);
 
 void			ft_bzero(void *s, size_t n);
 void			ft_memdel(void **ap);

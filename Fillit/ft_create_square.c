@@ -1,31 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_counttetri.c                                    :+:      :+:    :+:   */
+/*   ft_create_square.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/05 15:31:27 by pcalime           #+#    #+#             */
-/*   Updated: 2015/12/18 17:14:51 by pcalime          ###   ########.fr       */
+/*   Created: 2015/12/18 17:10:56 by pcalime           #+#    #+#             */
+/*   Updated: 2015/12/18 19:31:07 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_counttetri(char *str)
-{
-	int ret;
-	int cmpt;
+#include "libft.h"
 
+void	ft_create_square(int end, t_tetrimini *tab_piece)
+{	
+	char	**tab;
+	int		nb;
+	int		cmpt;
+	int		cmpt2;
+	//int		size
+	
+	nb = 0;
 	cmpt = 0;
-	ret = 0;
-	while (str[cmpt])
+	//size = ft_size(end);
+	tab = malloc(sizeof(char *) * 5);
+	while (cmpt < 4)
 	{
-		if (str[cmpt] == '\n')
-			ret++;
+		tab[cmpt] = malloc(sizeof(char) * 5);
+		cmpt ++;
+	}
+	cmpt = 0;
+	while (cmpt < 4)
+	{
+		cmpt2 = 0;
+		while (cmpt2 < 4)
+		{
+			tab[cmpt][cmpt2] = '.';
+			cmpt2++;
+		}
 		cmpt++;
 	}
-	ret++;
-	if ((ret % 5 != 0) || (ret > 130))
-		return (0);
-	ret /= 5;
-	return (ret);
+	ft_resolve(tab_piece, &tab, nb, end);
 }

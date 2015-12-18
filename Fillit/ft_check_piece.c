@@ -1,31 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_counttetri.c                                    :+:      :+:    :+:   */
+/*   ft_check_piece.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/05 15:31:27 by pcalime           #+#    #+#             */
-/*   Updated: 2015/12/18 17:14:51 by pcalime          ###   ########.fr       */
+/*   Created: 2015/12/18 16:36:10 by pcalime           #+#    #+#             */
+/*   Updated: 2015/12/18 18:51:38 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_counttetri(char *str)
-{
-	int ret;
-	int cmpt;
+#include "libft.h"
 
-	cmpt = 0;
-	ret = 0;
-	while (str[cmpt])
+int		ft_check_piece(t_tetrimini tab_piece, char **tab_final)
+{
+	int x;
+	int y;
+
+	x = 0;
+
+	while (tab_final[x])
 	{
-		if (str[cmpt] == '\n')
-			ret++;
-		cmpt++;
+		y = 0;
+		while (tab_final[x][y])
+		{
+			if (tab_piece.letter == tab_final[x][y])
+				return (0);
+			y++;
+		}
+		x++;
 	}
-	ret++;
-	if ((ret % 5 != 0) || (ret > 130))
-		return (0);
-	ret /= 5;
-	return (ret);
+	return (1);
 }

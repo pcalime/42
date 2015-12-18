@@ -6,17 +6,17 @@
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/08 19:59:21 by pcalime           #+#    #+#             */
-/*   Updated: 2015/12/15 16:54:27 by pcalime          ###   ########.fr       */
+/*   Updated: 2015/12/18 17:21:50 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_recup(t_tetrimini **tab_piece, char *str, size_t nb_tetri)
+int		ft_recup(t_tetrimini **tab_piece, char *str, int nb_tetri)
 {
 	char	*tmp;
 	char	**piece_split;
-	size_t	cmpt;
+	int		cmpt;
 	long	tmp_form;
 
 	cmpt = 0;

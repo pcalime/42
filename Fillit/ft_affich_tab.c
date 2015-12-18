@@ -1,31 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_counttetri.c                                    :+:      :+:    :+:   */
+/*   ft_affich_tab.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/05 15:31:27 by pcalime           #+#    #+#             */
-/*   Updated: 2015/12/18 17:14:51 by pcalime          ###   ########.fr       */
+/*   Created: 2015/12/18 18:46:29 by pcalime           #+#    #+#             */
+/*   Updated: 2015/12/18 18:49:50 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_counttetri(char *str)
-{
-	int ret;
-	int cmpt;
+#include "libft.h"
 
-	cmpt = 0;
-	ret = 0;
-	while (str[cmpt])
+void		ft_affich_tab(char **tab_final)
+{
+	int x;
+	int y;
+
+	x = 0;
+	while (tab_final[x])
 	{
-		if (str[cmpt] == '\n')
-			ret++;
-		cmpt++;
+		y = 0;
+		while (tab_final[x][y])
+		{
+			ft_putchar(tab_final[x][y]);
+			y++;
+		}
+		ft_putchar('\n');
+		x++;
 	}
-	ret++;
-	if ((ret % 5 != 0) || (ret > 130))
-		return (0);
-	ret /= 5;
-	return (ret);
 }
