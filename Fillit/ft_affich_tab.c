@@ -6,7 +6,7 @@
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/18 18:46:29 by pcalime           #+#    #+#             */
-/*   Updated: 2015/12/18 18:49:50 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/01/02 23:36:07 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ void		ft_affich_tab(char **tab_final)
 	int y;
 
 	x = 0;
-	while (tab_final[x])
+	while (tab_final[x] != '\0')
 	{
 		y = 0;
-		while (tab_final[x][y])
+		while (tab_final[x][y] != '\0')
 		{
 			ft_putchar(tab_final[x][y]);
 			y++;
