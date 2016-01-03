@@ -6,7 +6,7 @@
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/16 16:16:41 by pcalime           #+#    #+#             */
-/*   Updated: 2016/01/02 23:40:25 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/01/03 00:42:52 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ int		ft_resolve(t_tetrimini *tab_piece, char ***tab_final, int nb, int end)
 	int	cmpt;
 
 	cmpt = 0;
-
-	ft_affich_tab(tab_final[0]);
 	if (nb == end)
 		return (1);
 	while (cmpt < end)

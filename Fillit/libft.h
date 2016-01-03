@@ -6,7 +6,7 @@
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/26 18:36:46 by pcalime           #+#    #+#             */
-/*   Updated: 2016/01/02 22:43:08 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/01/03 02:05:51 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ long			ft_recup_tetri(char *s);
 int				ft_check_tetri(long n);
 int				ft_check_tetri_1(long n);
 void			ft_create_square(int end, t_tetrimini *tab_piece);
+int				ft_size(int nb);
 
 int				ft_resolve(t_tetrimini *tab_piece, char ***tab_final, int nb, int end);
 int				ft_check_piece(t_tetrimini tab_piece, char **tab_final);
@@ -52,7 +53,7 @@ int				ft_put_piece_3(t_tetrimini tab_piece, char ***tab_final);
 int				ft_put_piece_4(t_tetrimini tab_piece, char ***tab_final);
 void			ft_remove_piece(t_tetrimini tab_piece, char ***tab_final);
 
-void			ft_affich_tab(char **tab_final);
+void			ft_affich_tab(char **tab_final, int size);
 
 int				ft_put_square(char ***tab, t_tetrimini tab_piece);
 int				ft_put_s(char ***tab, t_tetrimini tab_piece);

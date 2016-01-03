@@ -1,33 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_affich_tab.c                                    :+:      :+:    :+:   */
+/*   ft_size.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/18 18:46:29 by pcalime           #+#    #+#             */
-/*   Updated: 2016/01/03 02:05:43 by pcalime          ###   ########.fr       */
+/*   Created: 2016/01/03 00:30:04 by pcalime           #+#    #+#             */
+/*   Updated: 2016/01/03 00:41:51 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void		ft_affich_tab(char **tab_final, int size)
+int		ft_size(int nb)
 {
-	int x;
-	int y;
+	int size;
 
-	x = 0;
-	y = 0;
-	while (x < size)
+	size = 0;
+	nb *= 4;
+	while ((size * size) < nb)
 	{
-		y = 0;
-		while (y < size)
-		{
-			ft_putchar(tab_final[x][y]);
-			y++;
-		}
-		ft_putchar('\n');
-		x++;
+		size++;
 	}
+	return (size);
 }
