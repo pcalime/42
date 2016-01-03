@@ -6,7 +6,7 @@
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/18 16:36:10 by pcalime           #+#    #+#             */
-/*   Updated: 2016/01/02 22:26:25 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/01/03 02:18:21 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int		ft_check_piece(t_tetrimini tab_piece, char **tab_final)
 	int y;
 
 	x = 0;
-
 	while (tab_final[x])
 	{
 		y = 0;

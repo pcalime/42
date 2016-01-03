@@ -6,13 +6,13 @@
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/18 16:44:07 by pcalime           #+#    #+#             */
-/*   Updated: 2015/12/18 18:20:54 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/01/03 02:59:12 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_put_i(char ***tab, t_tetrimini tab_piece)		// VERIFIE LA PLACE LIBRE OU PAS 
+int		ft_put_i(char ***tab, t_tetrimini tab_piece)
 {
 	int		x;
 	int		y;
@@ -39,7 +39,7 @@ int		ft_put_i(char ***tab, t_tetrimini tab_piece)		// VERIFIE LA PLACE LIBRE OU 
 	return (0);
 }
 
-int		ft_put_reversed_vertical_pipe(char ***tab, t_tetrimini tab_piece)
+int		ft_put_rever_verti_pipe(char ***tab, t_tetrimini tab_piece)
 {
 	int		x;
 	int		y;
@@ -77,8 +77,8 @@ int		ft_put_left_t(char ***tab, t_tetrimini tab_piece)
 		y = 0;
 		while (tab[0][x][y])
 		{
-			if (tab[0][x][y + 1] == '.' && tab[0][x + 1][y] == '.' && tab[0][x + 1][y + 1] == '.' 
-					&& tab[0][x + 2][y + 1] == '.')
+			if (tab[0][x][y + 1] == '.' && tab[0][x + 1][y] == '.'
+				&& tab[0][x + 1][y + 1] == '.' && tab[0][x + 2][y + 1] == '.')
 			{
 				tab[0][x][y + 1] = tab_piece.letter;
 				tab[0][x + 1][y] = tab_piece.letter;
@@ -104,8 +104,8 @@ int		ft_put_ship(char ***tab, t_tetrimini tab_piece)
 		y = 0;
 		while (tab[0][x][y])
 		{
-			if (tab[0][x][y + 1] == '.' && tab[0][x + 1][y] == '.' && tab[0][x + 1][y + 1] == '.' 
-					&& tab[0][x + 1][y + 2] == '.')
+			if (tab[0][x][y + 1] == '.' && tab[0][x + 1][y] == '.'
+				&& tab[0][x + 1][y + 1] == '.' && tab[0][x + 1][y + 2] == '.')
 			{
 				tab[0][x][y + 1] = tab_piece.letter;
 				tab[0][x + 1][y] = tab_piece.letter;

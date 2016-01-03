@@ -6,13 +6,13 @@
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/11 17:23:48 by pcalime           #+#    #+#             */
-/*   Updated: 2015/12/15 16:22:12 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/01/03 02:26:26 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-long		ft_check(char *s)  //ENLEVE LES '.' AU DEBUT ET A LA FIN DE LA STRING
+long		ft_check(char *s)
 {
 	char	*s1;
 	int		i;
@@ -29,7 +29,7 @@ long		ft_check(char *s)  //ENLEVE LES '.' AU DEBUT ET A LA FIN DE LA STRING
 	return (ft_recup_tetri(s1));
 }
 
-long		ft_recup_tetri(char *str)		// CHANGE LES '.' EN 0 ET LES '#' EN 1
+long		ft_recup_tetri(char *str)
 {
 	int		i;
 	long	ret;

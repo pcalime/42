@@ -6,13 +6,13 @@
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/18 16:43:29 by pcalime           #+#    #+#             */
-/*   Updated: 2015/12/18 16:46:32 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/01/03 02:34:53 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_put_pipe(char ***tab, t_tetrimini tab_piece)		// VERIFIE LA PLACE LIBRE OU PAS 
+int		ft_put_pipe(char ***tab, t_tetrimini tab_piece)
 {
 	int		x;
 	int		y;
@@ -50,8 +50,8 @@ int		ft_put_reversed_gun(char ***tab, t_tetrimini tab_piece)
 		y = 0;
 		while (tab[0][x][y])
 		{
-			if (tab[0][x][y] == '.' && tab[0][x][y + 1] == '.' && tab[0][x][y + 2] == '.' 
-					&& tab[0][x + 1][y + 2] == '.')
+			if (tab[0][x][y] == '.' && tab[0][x][y + 1] == '.'
+					&& tab[0][x][y + 2] == '.' && tab[0][x + 1][y + 2] == '.')
 			{
 				tab[0][x][y] = tab_piece.letter;
 				tab[0][x][y + 1] = tab_piece.letter;
@@ -77,8 +77,8 @@ int		ft_put_right_t(char ***tab, t_tetrimini tab_piece)
 		y = 0;
 		while (tab[0][x][y])
 		{
-			if (tab[0][x][y] == '.' && tab[0][x + 1][y] == '.' && tab[0][x + 1][y + 1] == '.' 
-					&& tab[0][x + 2][y] == '.')
+			if (tab[0][x][y] == '.' && tab[0][x + 1][y] == '.'
+					&& tab[0][x + 1][y + 1] == '.' && tab[0][x + 2][y] == '.')
 			{
 				tab[0][x][y] = tab_piece.letter;
 				tab[0][x + 1][y] = tab_piece.letter;
@@ -104,8 +104,8 @@ int		ft_put_vertical_pipe(char ***tab, t_tetrimini tab_piece)
 		y = 0;
 		while (tab[0][x][y])
 		{
-			if (tab[0][x][y] == '.' && tab[0][x][y + 1] == '.' && tab[0][x + 1][y + 1] == '.' 
-					&& tab[0][x + 2][y + 1] == '.')
+			if (tab[0][x][y] == '.' && tab[0][x][y + 1] == '.'
+				&& tab[0][x + 1][y + 1] == '.' && tab[0][x + 2][y + 1] == '.')
 			{
 				tab[0][x][y] = tab_piece.letter;
 				tab[0][x][y + 1] = tab_piece.letter;
@@ -131,8 +131,8 @@ int		ft_put_reversed_pipe(char ***tab, t_tetrimini tab_piece)
 		y = 0;
 		while (tab[0][x][y])
 		{
-			if (tab[0][x][y] == '.' && tab[0][x + 1][y] == '.' && tab[0][x + 1][y + 1] == '.' 
-					&& tab[0][x + 1][y + 2] == '.')
+			if (tab[0][x][y] == '.' && tab[0][x + 1][y] == '.'
+				&& tab[0][x + 1][y + 1] == '.' && tab[0][x + 1][y + 2] == '.')
 			{
 				tab[0][x][y] = tab_piece.letter;
 				tab[0][x + 1][y] = tab_piece.letter;

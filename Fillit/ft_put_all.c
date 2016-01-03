@@ -6,7 +6,7 @@
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/18 16:34:35 by pcalime           #+#    #+#             */
-/*   Updated: 2016/01/02 23:36:01 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/01/03 03:00:38 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int		ft_put_piece(t_tetrimini tab_piece, char ***tab_final)
 		if (ft_put_vertical_s(&tab_final[0], tab_piece))
 			return (1);
 	}
-	if (tab_piece.forme== 100010011)
+	if (tab_piece.forme == 100010011)
 	{
 		if (ft_put_reversed_l(&tab_final[0], tab_piece))
 			return (1);
@@ -50,16 +50,13 @@ int		ft_put_piece(t_tetrimini tab_piece, char ***tab_final)
 		if (ft_put_t(&tab_final[0], tab_piece))
 			return (1);
 	}
-	return(0);
+	return (0);
 }
 
 int		ft_put_piece_2(t_tetrimini tab_piece, char ***tab_final)
 {
 	if (tab_piece.forme == 1100011)
-	{
-		if (ft_put_reversed_s(&tab_final[0], tab_piece))
-			return (1);
-	}
+		return (ft_put_reversed_s(&tab_final[0], tab_piece));
 	if (tab_piece.forme == 10011001)
 	{
 		if (ft_put_reversed_vertical_s(&tab_final[0], tab_piece))
@@ -101,7 +98,7 @@ int		ft_put_piece_3(t_tetrimini tab_piece, char ***tab_final)
 			return (1);
 	}
 	if (tab_piece.forme == 1100010001)
-		return (ft_put_vertical_pipe(&tab_final[0], tab_piece));	
+		return (ft_put_vertical_pipe(&tab_final[0], tab_piece));
 	if (tab_piece.forme == 1000111)
 	{
 		if (ft_put_reversed_pipe(&tab_final[0], tab_piece))
@@ -113,7 +110,7 @@ int		ft_put_piece_3(t_tetrimini tab_piece, char ***tab_final)
 int		ft_put_piece_4(t_tetrimini tab_piece, char ***tab_final)
 {
 	if (tab_piece.forme == 110010001)
-		return (ft_put_reversed_vertical_pipe(&tab_final[0], tab_piece));
+		return (ft_put_rever_verti_pipe(&tab_final[0], tab_piece));
 	if (tab_piece.forme == 100110001)
 	{
 		if (ft_put_left_t(&tab_final[0], tab_piece))
