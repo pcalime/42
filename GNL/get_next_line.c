@@ -48,17 +48,17 @@ int		get_next_line(int const fd, char **line)
 	char		*ptr;
 	int			retour;
 
-	ptr = malloc(sizeof(char) * BUF_SIZE + 1);
+	/*ptr = malloc(sizeof(char) * BUF_SIZE + 1);
 	buf = malloc(sizeof(char) * BUF_SIZE + 1);
 	ret = read(fd, buf, BUF_SIZE);
 	buf[ret] = '\0';
-	ptr = ft_strjoin(ptr, buf);
+	ptr = ft_strjoin(ptr, buf);				faire une char *fonction(int const fd) + static ptr
 	while (ret)
 	{
 		ret = read(fd, buf, BUF_SIZE);
 		buf[ret] = '\0';
 		ptr = ft_strjoin(ptr, buf);
-	}
+	}*/
 	*line = ft_read_line(ptr, &retour);
  	return (retour);
 }
