@@ -10,6 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+static struct	{
+	int fd;
+	char *buf;
+	char *ptr;
+}
+
+
+
 #include "get_next_line.h"
 #include "libft.h"
 
