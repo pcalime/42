@@ -6,7 +6,7 @@
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/08 18:18:08 by pcalime           #+#    #+#             */
-/*   Updated: 2016/02/08 18:57:51 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/02/08 19:26:37 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,8 @@ int		main(void)
 
 	p1.x = 200;
 	p1.y = 100;
-	p2.x = 0;
-	p2.y = 0;
+	p2.x = 200;
+	p2.y = 200;
 
 	data.mlx = mlx_init();
 	data.win = mlx_new_window(data.mlx, 300, 300, "test");
