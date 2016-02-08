@@ -6,7 +6,7 @@
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/08 18:18:08 by pcalime           #+#    #+#             */
-/*   Updated: 2016/02/08 18:55:15 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/02/08 18:57:51 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ void	ft_draw_line(data_t data, point_t p1, point_t p2)
 		}
 		ft_draw_line_x(data, p1, p2, slope);
 	}
-
 }
 
 int		main(void)
