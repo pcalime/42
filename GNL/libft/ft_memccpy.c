@@ -1,25 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_memccpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/08 16:53:14 by pcalime           #+#    #+#             */
-/*   Updated: 2016/02/01 16:35:13 by pcalime          ###   ########.fr       */
+/*   Created: 2015/11/28 18:39:01 by pcalime           #+#    #+#             */
+/*   Updated: 2015/12/03 12:21:01 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include <stdlib.h>
-# include <sys/types.h>
-# include <sys/uio.h>
-# include <unistd.h>
+void	*ft_memccpy(void *dst, const void *src, int c, size_t n)
+{
+	size_t	cmpt;
+	char	*dst_cpy;
+	char	*src_cpy;
 
-# define BUFF_SIZE 100
-
-int		get_next_line(int const fd, char **line);
-
-#endif
+	if (!dst || !src)
+		return (NULL);
+	dst_cpy = (char *)dst;
+	src_cpy = (char *)src;
+	cmpt = 0;
+	while (n > 0)
+	{
+		dst_cpy[cmpt] = src_cpy[cmpt];
+		if (src_cpy[cmpt] == c)
+			return (dst_cpy + cmpt + 1);
+		cmpt++;
+		n--;
+	}
+	return (NULL);
+}

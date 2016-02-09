@@ -6,87 +6,77 @@
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/08 16:52:37 by pcalime           #+#    #+#             */
-/*   Updated: 2016/01/12 15:37:30 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/02/01 16:44:53 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-static struct	{
-	int fd;
-	char *buf;
-	char *ptr;
-}
-
-
-
 #include "get_next_line.h"
-#include "libft.h"
+#include "libft/libft.h"
 
-char	*ft_read_line(char *ptr, int *retour)
+static char	*ft_read_line(char *ptr, int *retour)
 {
-	static int	cmpt = 0;
+	static int	cmpt = -1;
 	int			cmpt2;
 
-	printf("%d", cmpt);
-	ft_putstr(ptr);
 	cmpt2 = 0;
 	*retour = 1;
-	while (ptr[cmpt] != '\0')
+	if (ptr[cmpt] == '\0' && cmpt != -1)
 	{
-		if (ptr[cmpt] == '\n')
-		{
-			return (ft_strndup(&ptr[cmpt - cmpt2], cmpt2));
-		}
+		*retour = 0;
+		return (NULL);
+	}
+	else if (ptr[cmpt] == '\n' && ptr[cmpt + 1] == '\0')
+	{
+		*retour = 0;
+		return (NULL);
+	}
+	cmpt++;
+	while (ptr[cmpt] != '\0' && ptr[cmpt] != '\n')
+	{
 		cmpt2++;
 		cmpt++;
 	}
-	if (ptr[cmpt] == '\0')
-	{
-		*retour = 0;
-		return (ft_strndup(&ptr[cmpt - cmpt2], cmpt2));
-		
-	}
-	*retour = -1;
-	return (NULL);
+	return (ft_strndup(&ptr[cmpt - cmpt2], cmpt2));
 }
 
-int		get_next_line(int const fd, char **line)
+static char	*ft_read_fd(int const fd, int *retour)
 {
-	int			ret;
-	char		*buf;
-	char		*ptr;
-	int			retour;
+	int		ret;
+	char	*buf;
+	char	*ptr;
 
-	/*ptr = malloc(sizeof(char) * BUF_SIZE + 1);
-	buf = malloc(sizeof(char) * BUF_SIZE + 1);
-	ret = read(fd, buf, BUF_SIZE);
+	ret = 0;
+	ptr = malloc(sizeof(char) * BUFF_SIZE + 1);
+	buf = malloc(sizeof(char) * BUFF_SIZE + 1);
+	ret = read(fd, buf, BUFF_SIZE);
 	buf[ret] = '\0';
-	ptr = ft_strjoin(ptr, buf);				faire une char *fonction(int const fd) + static ptr
+	ptr = ft_strjoin(ptr, buf);
+	if (ret == -1)
+	{
+		*retour = -1;
+		return (NULL);
+	}
 	while (ret)
 	{
-		ret = read(fd, buf, BUF_SIZE);
+		ret = read(fd, buf, BUFF_SIZE);
 		buf[ret] = '\0';
 		ptr = ft_strjoin(ptr, buf);
-	}*/
-	*line = ft_read_line(ptr, &retour);
- 	return (retour);
+	}
+	return (ptr);
 }
 
-int		main(int argc, char **argv)
+int			get_next_line(int const fd, char **line)
 {
-	int fd;
-	char *line;
+	int			retour;
+	static char	*ptr_final;
 
-	line = malloc(sizeof(char) * BUF_SIZE + 1);
-	if (argc == 2)
-	{
-		fd = open(argv[1], O_RDONLY);
-		get_next_line(fd, &line);
-		printf("%s", line);
-		get_next_line(fd, &line);
-		printf("%s", line);
-		get_next_line(fd, &line);
-		printf("%s", line);
-		get_next_line(fd, &line);
-		printf("%s", line);
-	}
+	retour = 0;
+	if (fd < 0)
+		return (-1);
+	if (ptr_final == NULL)
+		ptr_final = ft_read_fd(fd, &retour);
+	if (retour == -1)
+		return (retour);
+	*line = ft_read_line(ptr_final, &retour);
+	return (retour);
 }

@@ -1,25 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/08 16:53:14 by pcalime           #+#    #+#             */
-/*   Updated: 2016/02/01 16:35:13 by pcalime          ###   ########.fr       */
+/*   Created: 2015/11/28 19:12:04 by pcalime           #+#    #+#             */
+/*   Updated: 2015/11/30 19:58:09 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include <stdlib.h>
-# include <sys/types.h>
-# include <sys/uio.h>
-# include <unistd.h>
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
+{
+	unsigned char	*s1_cpy;
+	unsigned char	*s2_cpy;
+	int				i;
 
-# define BUFF_SIZE 100
-
-int		get_next_line(int const fd, char **line);
-
-#endif
+	if (!s1 && !s2 && !n)
+		return (0);
+	i = 0;
+	s1_cpy = (unsigned char*)s1;
+	s2_cpy = (unsigned char*)s2;
+	while (n--)
+	{
+		if (s1_cpy[i] != s2_cpy[i])
+			return (s1_cpy[i] - s2_cpy[i]);
+		i++;
+	}
+	return (0);
+}

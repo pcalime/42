@@ -1,31 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   ft_memalloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/10 17:39:30 by pcalime           #+#    #+#             */
-/*   Updated: 2016/01/10 18:55:07 by pcalime          ###   ########.fr       */
+/*   Created: 2015/11/30 18:59:18 by pcalime           #+#    #+#             */
+/*   Updated: 2015/11/30 18:59:46 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "libft.h"
 
-void	pouet()
+void		*ft_memalloc(size_t size)
 {
-	static int cmpt = 0;
-	cmpt++;
-	printf("%d", cmpt);
-}
+	char *str;
 
-int		main(void)
-{
-	char	str[] = "paulleplusbo";
-	pouet();
-	pouet();
-	pouet();
-	pouet();
-	pouet();
-	return (0);
+	str = (char*)malloc(sizeof(char) * size);
+	if (size == 0)
+		return (NULL);
+	if (!str)
+		return (NULL);
+	ft_bzero(str, size);
+	return ((void*)str);
 }
