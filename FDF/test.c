@@ -6,7 +6,7 @@
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/08 18:18:08 by pcalime           #+#    #+#             */
-/*   Updated: 2016/02/08 19:26:37 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/02/09 17:00:23 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,6 @@ int		main(void)
 
 	data.mlx = mlx_init();
 	data.win = mlx_new_window(data.mlx, 300, 300, "test");
-	mlx_pixel_put(data.mlx, data.win, 150, 150, 0xffffff);
 	ft_draw_line(data, p1, p2);
 	mlx_loop(data.mlx);
 }
