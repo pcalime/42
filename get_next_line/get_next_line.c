@@ -15,5 +15,18 @@
 
 int		get_next_line(int const fd, char **line)
 {
+	static	gnl_t	gnl;
+	int		ret;
+	
+	if (fd < 0)
+		return (-1);
+	ret = read(fd, gnl.buf, BUFF_SIZE);
+	if (ret == -1)
+		return (ret);
+	buf[ret] = '\0';
+	while (ret)
+	{
+		
+	}
 	
 }
