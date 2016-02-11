@@ -22,7 +22,7 @@
 
 typedef static struct	gnl_s
 {
-	int fd;
+	int cmpt;
 	char *buf;
 	char *ptr;
 }						gnl_t;
