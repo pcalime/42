@@ -20,13 +20,14 @@ int		get_next_line(int const fd, char **line)
 	
 	if (fd < 0)
 		return (-1);
-	ret = read(fd, gnl.buf, BUFF_SIZE);
-	if (ret == -1)
-		return (ret);
-	buf[ret] = '\0';
-	while (ret)
+	gnl.buf = malloc(sizeof(char) * BUFF_SIZE);
+	gnl.ptr = malloc(sizeof(char) * BUFF_SIZE);
+	while (ret = read(fd, gnl.buf, BUFF_SIZE))
 	{
+		if (ret == -1)
+			return (ret);
+		if (ret == 0)
+			return (ret);
 		
 	}
-	
 }
