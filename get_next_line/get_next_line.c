@@ -6,7 +6,7 @@
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/09 17:14:56 by pcalime           #+#    #+#             */
-/*   Updated: 2016/02/12 17:56:30 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/02/12 18:45:54 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,18 +47,28 @@ static	char		*ft_fill_line(t_gnl gnl)
 	return (line);
 }
 
+static	void	init_buf(t_gnl *gnl, char **line)
+{	
+	*line = (char *)ft_memalloc(1);
+	if (gnl->buf == NULL)
+	{
+		gnl->buf = malloc(sizeof(char) * BUFF_SIZE);
+		gnl->ptr = malloc(sizeof(char) * BUFF_SIZE);
+	}
+}
+
 int				get_next_line(int const fd, char **line)
 {
 	static	t_gnl	gnl;
 	int				ret;
 
-	*line = (char *)ft_memalloc(1);
 	if (fd < 0)
 		return (-1);
-	gnl.buf = malloc(sizeof(char) * BUFF_SIZE);
-	gnl.ptr = malloc(sizeof(char) * BUFF_SIZE);
+	init_buf(&gnl, line);
+	ft_putstr(gnl.ptr);
 	if (ft_is_this_char(gnl.ptr, '\n') == 1)
 	{
+		ft_putstr("pouet1");
 		*line = ft_fill_line(gnl);
 		return (1);
 	}
@@ -66,8 +76,10 @@ int				get_next_line(int const fd, char **line)
 	{
 		gnl.buf[ret] = '\0';
 		gnl.ptr = ft_strjoin(gnl.ptr, gnl.buf);
+		ft_putstr("pouet2");
 		if (ft_is_this_char(gnl.ptr, '\n') == 1)
 		{
+			ft_putstr("pouet3");
 			*line = ft_fill_line(gnl);
 			return (1);
 		}
