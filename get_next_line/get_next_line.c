@@ -6,13 +6,45 @@
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/15 12:06:25 by pcalime           #+#    #+#             */
-/*   Updated: 2016/02/15 12:53:09 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/02/15 14:44:34 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include "libft/libft.h"
 
+
+static char	*ft_fill_line(char *buf, char *line)
+{
+	int		i;
+	char	*tmp;
+	int		j;
+
+	i = 0;
+	while (buf[i] != '\0' && buf[i] != '\n')
+		i++;
+	if (line)
+		i += ft_strlen(line);
+	tmp = line;
+	line = (char *)ft_memalloc(i + 1);
+	i = 0;
+	ft_strcpy(line, tmp);
+	i = ft_strlen(tmp);
+	j = 0;
+	while (buf[j] != '\0' && buf[j] != '\n')
+	{
+		line[i] = buf[j];
+		i++;
+		j++;
+	}
+	line[i] = '\0';
+	free(tmp);
+	return (line);
+}
+
+
+
+/*
 static char	*ft_fill_line(char *str, char *line)
 {
 	int		cmpt;
@@ -23,9 +55,10 @@ static char	*ft_fill_line(char *str, char *line)
 		cmpt++;
 	tmp = ft_strndup(str, cmpt);
 	line = ft_strjoin(line, tmp);
-	free(tmp);
+	if (tmp)
+		free(tmp);
 	return (line);
-}
+}*/
 
 static void	init_buf(t_gnl **gnl, char **line)
 {
@@ -40,7 +73,7 @@ static void	init_buf(t_gnl **gnl, char **line)
 
 static int	ft_get_next_line(int const fd, char **line)
 {
-	static	t_gnl	*gnl;
+	static	t_gnl	*gnl = NULL;
 	int				ret;
 
 	init_buf(&gnl, line);
@@ -51,7 +84,7 @@ static int	ft_get_next_line(int const fd, char **line)
 			*line = ft_fill_line(gnl->ptr + 1, *line);
 			if ((gnl->ptr = ft_strchr(gnl->ptr + 1, '\n')) == NULL)
 			{
-				if ((ret = read(fd, gnl->buf, BUFF_SIZE)))
+				if ((ret = read(fd, gnl->buf, BUFF_SIZE)) == 0)
 					return (0);
 			}
 			else
