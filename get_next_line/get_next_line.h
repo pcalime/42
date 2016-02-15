@@ -6,7 +6,7 @@
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/08 16:53:14 by pcalime           #+#    #+#             */
-/*   Updated: 2016/02/12 17:06:52 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/02/15 12:53:23 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ typedef	struct	s_gnl
 	char		*ptr;
 }				t_gnl;
 
-
-int		get_next_line(int const fd, char **line);
+int				get_next_line(int const fd, char **line);
 
 #endif

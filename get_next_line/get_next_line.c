@@ -5,84 +5,71 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/09 17:14:56 by pcalime           #+#    #+#             */
-/*   Updated: 2016/02/12 18:45:54 by pcalime          ###   ########.fr       */
+/*   Created: 2016/02/15 12:06:25 by pcalime           #+#    #+#             */
+/*   Updated: 2016/02/15 12:53:09 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	"get_next_line.h"
-#include	"libft/libft.h"
+#include "get_next_line.h"
+#include "libft/libft.h"
 
-static	int		ft_is_this_char(char *str, char c)
+static char	*ft_fill_line(char *str, char *line)
 {
 	int		cmpt;
-
-	cmpt = 0;
-	while (str[cmpt])
-	{
-		if (str[cmpt] == c)
-		{
-			return (1);
-		}
-		cmpt++;
-	}
-	return (0);
-}
-
-static	char		*ft_fill_line(t_gnl gnl)
-{
-	int		cmpt;
-	int		len;
 	char	*tmp;
-	char	*line;
 
 	cmpt = 0;
-	while (gnl.ptr[cmpt] && gnl.ptr[cmpt] != '\n')
+	while (str[cmpt] != '\n' && str[cmpt] != '\0')
 		cmpt++;
-	line = ft_strndup(gnl.ptr, cmpt);
-	len = ft_strlen(gnl.ptr);
-	tmp = gnl.ptr;
-	free(gnl.ptr);
-	gnl.ptr = ft_strndup(&tmp[cmpt + 1], len - cmpt);
+	tmp = ft_strndup(str, cmpt);
+	line = ft_strjoin(line, tmp);
+	free(tmp);
 	return (line);
 }
 
-static	void	init_buf(t_gnl *gnl, char **line)
-{	
+static void	init_buf(t_gnl **gnl, char **line)
+{
 	*line = (char *)ft_memalloc(1);
-	if (gnl->buf == NULL)
+	if (!*gnl)
 	{
-		gnl->buf = malloc(sizeof(char) * BUFF_SIZE);
-		gnl->ptr = malloc(sizeof(char) * BUFF_SIZE);
+		*gnl = (t_gnl *)ft_memalloc(sizeof(t_gnl));
+		(*gnl)->buf = (char *)ft_memalloc(BUFF_SIZE + 1);
+		(*gnl)->ptr = NULL;
 	}
 }
 
-int				get_next_line(int const fd, char **line)
+static int	ft_get_next_line(int const fd, char **line)
 {
-	static	t_gnl	gnl;
+	static	t_gnl	*gnl;
 	int				ret;
 
-	if (fd < 0)
-		return (-1);
 	init_buf(&gnl, line);
-	ft_putstr(gnl.ptr);
-	if (ft_is_this_char(gnl.ptr, '\n') == 1)
+	while (gnl->ptr || (ret = read(fd, gnl->buf, BUFF_SIZE)))
 	{
-		ft_putstr("pouet1");
-		*line = ft_fill_line(gnl);
-		return (1);
-	}
-	while ((ret = read(fd, gnl.buf, BUFF_SIZE)))
-	{
-		gnl.buf[ret] = '\0';
-		gnl.ptr = ft_strjoin(gnl.ptr, gnl.buf);
-		ft_putstr("pouet2");
-		if (ft_is_this_char(gnl.ptr, '\n') == 1)
+		if (gnl->ptr)
 		{
-			ft_putstr("pouet3");
-			*line = ft_fill_line(gnl);
-			return (1);
+			*line = ft_fill_line(gnl->ptr + 1, *line);
+			if ((gnl->ptr = ft_strchr(gnl->ptr + 1, '\n')) == NULL)
+			{
+				if ((ret = read(fd, gnl->buf, BUFF_SIZE)))
+					return (0);
+			}
+			else
+				return (1);
 		}
+		if (ret == -1)
+			return (ret);
+		gnl->buf[ret] = '\0';
+		*line = ft_fill_line(gnl->buf, *line);
+		if ((gnl->ptr = ft_strchr(gnl->buf, '\n')) != NULL)
+			return (1);
 	}
-	return (ret);
+	return ((ret || **line) ? 1 : 0);
+}
+
+int			get_next_line(int const fd, char **line)
+{
+	if (fd < 0 || line == NULL)
+		return (-1);
+	return (ft_get_next_line(fd, line));
 }
