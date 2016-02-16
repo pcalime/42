@@ -6,7 +6,7 @@
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 13:58:23 by pcalime           #+#    #+#             */
-/*   Updated: 2016/02/16 14:18:59 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/02/16 14:20:58 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,4 @@ int		get_next_line(int const fd, char **line)
 	int				ret;
 
 	init_buf(&gnl, line);
-	if (gnl->ptr)
-	{
-		*line = ft_fill_line(gnl->ptr + 1, *line);
-		if ((gnl->ptr = ft_strchr(gnl->ptr + 1, '\n')) == NULL)
-		{
-			
-		}
-	}
 }
