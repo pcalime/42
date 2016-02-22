@@ -1,31 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/08 16:53:14 by pcalime           #+#    #+#             */
-/*   Updated: 2016/02/20 18:22:42 by pcalime          ###   ########.fr       */
+/*   Created: 2015/11/27 17:39:25 by pcalime           #+#    #+#             */
+/*   Updated: 2015/11/30 20:02:33 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include <stdlib.h>
-# include <sys/types.h>
-# include <sys/uio.h>
-# include <unistd.h>
-
-# define BUFF_SIZE 1
-
-typedef	struct	s_gnl
+char	*ft_strstr(const char *s1, const char *s2)
 {
-	char		*buf;
-	char		*ptr;
-}				t_gnl;
+	int		cmpt1;
+	int		cmpt2;
 
-int				get_next_line(int const fd, char **line);
-
-#endif
+	cmpt1 = 0;
+	cmpt2 = 0;
+	if (!*s2)
+		return ((char*)s1);
+	while (s1[cmpt1])
+	{
+		while (s1[cmpt1 + cmpt2] && s1[cmpt1 + cmpt2] == s2[cmpt2])
+			cmpt2++;
+		if (!s2[cmpt2])
+			return ((char *)s1 + cmpt1);
+		else
+			cmpt2 = 0;
+		cmpt1++;
+	}
+	return (0);
+}

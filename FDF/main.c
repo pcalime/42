@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/08 16:53:14 by pcalime           #+#    #+#             */
-/*   Updated: 2016/02/20 18:22:42 by pcalime          ###   ########.fr       */
+/*   Created: 2016/02/21 17:17:56 by pcalime           #+#    #+#             */
+/*   Updated: 2016/02/21 17:50:07 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "fdf.h"
 
-# include <stdlib.h>
-# include <sys/types.h>
-# include <sys/uio.h>
-# include <unistd.h>
-
-# define BUFF_SIZE 1
-
-typedef	struct	s_gnl
+int		main(int argc, char **argv)
 {
-	char		*buf;
-	char		*ptr;
-}				t_gnl;
+	if (argc != 5)
+		return (1);
+	t_data	data;
+	t_point	p1;
+	t_point	p2;
 
-int				get_next_line(int const fd, char **line);
-
-#endif
+	p1.x = (float)ft_atoi(argv[1]);
+	p1.y = (float)ft_atoi(argv[2]);
+	p2.x = (float)ft_atoi(argv[3]);
+	p2.y = (float)ft_atoi(argv[4]);
+	data.mlx = mlx_init();
+	data.win = mlx_new_window(data.mlx, 300, 300, "test");
+	ft_draw_line(data, p1, p2);
+	mlx_loop(data.mlx);
+}

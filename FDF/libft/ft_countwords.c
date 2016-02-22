@@ -1,31 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_countwords.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/08 16:53:14 by pcalime           #+#    #+#             */
-/*   Updated: 2016/02/20 18:22:42 by pcalime          ###   ########.fr       */
+/*   Created: 2015/12/06 15:13:27 by pcalime           #+#    #+#             */
+/*   Updated: 2016/01/28 16:39:22 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include <stdio.h>
 
-# include <stdlib.h>
-# include <sys/types.h>
-# include <sys/uio.h>
-# include <unistd.h>
-
-# define BUFF_SIZE 1
-
-typedef	struct	s_gnl
+static	int	is_sep(char c)
 {
-	char		*buf;
-	char		*ptr;
-}				t_gnl;
+	if (c == ' ' || c == '\t' || c == '\0')
+		return (0);
+	return (1);
+}
 
-int				get_next_line(int const fd, char **line);
+int			ft_countwords(const char *str)
+{
+	int		count;
+	int		word;
 
-#endif
+	if (str == NULL)
+		return (0);
+	word = 0;
+	count = 0;
+	while (str[count] != '\0')
+	{
+		if (is_sep(str[count]) && is_sep(str[count + 1]) == 0)
+			++word;
+		++count;
+	}
+	return (word);
+}

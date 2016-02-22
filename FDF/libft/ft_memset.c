@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/08 16:53:14 by pcalime           #+#    #+#             */
-/*   Updated: 2016/02/20 18:22:42 by pcalime          ###   ########.fr       */
+/*   Created: 2015/11/27 17:48:53 by pcalime           #+#    #+#             */
+/*   Updated: 2015/11/30 20:03:57 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include <stdlib.h>
-# include <sys/types.h>
-# include <sys/uio.h>
-# include <unistd.h>
-
-# define BUFF_SIZE 1
-
-typedef	struct	s_gnl
+void	*ft_memset(void *b, int c, size_t len)
 {
-	char		*buf;
-	char		*ptr;
-}				t_gnl;
+	size_t			cmpt;
+	unsigned char	*str;
 
-int				get_next_line(int const fd, char **line);
-
-#endif
+	str = (unsigned char *)b;
+	cmpt = 0;
+	while (cmpt < len)
+	{
+		str[cmpt] = c;
+		cmpt++;
+	}
+	return (str);
+}

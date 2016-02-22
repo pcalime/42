@@ -1,32 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   ft_draw_line.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/08 18:18:08 by pcalime           #+#    #+#             */
-/*   Updated: 2016/02/09 17:00:23 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/02/21 18:58:26 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <mlx.h>
-#include <stdio.h>
+#include "fdf.h"
 
-typedef	struct
-{
-	void	*mlx;
-	void	*win;
-} data_t;
-
-typedef	struct
-{
-	float	x;
-	float	y;
-} point_t;
-
-
-void	ft_draw_line_x(data_t data, point_t p1, point_t p2, float slope)
+void	ft_draw_line_x(t_data data, t_point p1, t_point p2, float slope)
 {
 	float	x;
 	float	y;
@@ -41,7 +27,7 @@ void	ft_draw_line_x(data_t data, point_t p1, point_t p2, float slope)
 	}
 }
 
-void	ft_draw_line_y(data_t data, point_t p1, point_t p2, float slope)
+void	ft_draw_line_y(t_data data, t_point p1, t_point p2, float slope)
 {
 	float	x;
 	float	y;
@@ -56,12 +42,12 @@ void	ft_draw_line_y(data_t data, point_t p1, point_t p2, float slope)
 	}
 }
 
-void	ft_draw_line(data_t data, point_t p1, point_t p2)
+void	ft_draw_line(t_data data, t_point p1, t_point p2)
 {
 	float	slope;
-	point_t swap;
+	t_point swap;
 
-	slope = (p2.y - p1.y)/(p2.x - p1.x);
+	slope = (p2.y - p1.y) / (p2.x - p1.x);
 	if (slope < 1 && slope > -1)
 	{
 		if (p1.x >= p2.x)
@@ -82,21 +68,4 @@ void	ft_draw_line(data_t data, point_t p1, point_t p2)
 		}
 		ft_draw_line_x(data, p1, p2, slope);
 	}
-}
-
-int		main(void)
-{
-	data_t	data;
-	point_t p1;
-	point_t p2;
-
-	p1.x = 200;
-	p1.y = 100;
-	p2.x = 200;
-	p2.y = 200;
-
-	data.mlx = mlx_init();
-	data.win = mlx_new_window(data.mlx, 300, 300, "test");
-	ft_draw_line(data, p1, p2);
-	mlx_loop(data.mlx);
 }

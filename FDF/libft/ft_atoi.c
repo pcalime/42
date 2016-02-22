@@ -1,31 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/08 16:53:14 by pcalime           #+#    #+#             */
-/*   Updated: 2016/02/20 18:22:42 by pcalime          ###   ########.fr       */
+/*   Created: 2015/11/26 14:56:32 by pcalime           #+#    #+#             */
+/*   Updated: 2015/12/03 12:20:47 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include <stdlib.h>
-# include <sys/types.h>
-# include <sys/uio.h>
-# include <unistd.h>
-
-# define BUFF_SIZE 1
-
-typedef	struct	s_gnl
+int		ft_atoi(const char *str)
 {
-	char		*buf;
-	char		*ptr;
-}				t_gnl;
+	int cmpt;
+	int number;
+	int negative;
 
-int				get_next_line(int const fd, char **line);
-
-#endif
+	number = 0;
+	cmpt = 0;
+	negative = 1;
+	while (ft_isspace(str[cmpt]))
+		cmpt++;
+	if (str[cmpt] == '-')
+	{
+		negative = -1;
+	}
+	if (str[cmpt] == '+' || str[cmpt] == '-')
+		cmpt++;
+	while (str[cmpt] >= '0' && str[cmpt] <= '9')
+	{
+		number *= 10;
+		number += str[cmpt] - 48;
+		cmpt++;
+	}
+	return (number *= negative);
+}

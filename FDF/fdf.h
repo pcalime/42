@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/08 16:53:14 by pcalime           #+#    #+#             */
-/*   Updated: 2016/02/20 18:22:42 by pcalime          ###   ########.fr       */
+/*   Created: 2016/02/21 17:10:20 by pcalime           #+#    #+#             */
+/*   Updated: 2016/02/21 17:49:32 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef FDF_H
+# define FDF_H
 
-# include <stdlib.h>
-# include <sys/types.h>
-# include <sys/uio.h>
-# include <unistd.h>
+# include <mlx.h>
+# include "libft/libft.h"
 
-# define BUFF_SIZE 1
-
-typedef	struct	s_gnl
+typedef struct	s_data
 {
-	char		*buf;
-	char		*ptr;
-}				t_gnl;
+	void		*mlx;
+	void		*win;
+}				t_data;
 
-int				get_next_line(int const fd, char **line);
+typedef struct	s_point
+{
+	float		x;
+	float		y;
+}				t_point;
+
+void	ft_draw_line(t_data data, t_point p1, t_point p2);
 
 #endif
