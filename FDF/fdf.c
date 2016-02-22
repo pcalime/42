@@ -1,34 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   fdf.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/21 17:10:20 by pcalime           #+#    #+#             */
-/*   Updated: 2016/02/22 19:01:15 by pcalime          ###   ########.fr       */
+/*   Created: 2016/02/22 18:32:12 by pcalime           #+#    #+#             */
+/*   Updated: 2016/02/22 18:45:47 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
+#include "fdf.h"
 
-# include <mlx.h>
-# include "libft/libft.h"
-# include <stdlib.h>
-
-typedef struct	s_data
+char	*ft_read(char *str)
 {
-	void		*mlx;
-	void		*win;
-}				t_data;
 
-typedef struct	s_point
+}
+
+void	ft_fdf(argv[1])
 {
-	float		x;
-	float		y;
-}				t_point;
+	
+}
 
-void	ft_draw_line(t_data data, t_point p1, t_point p2);
-
-#endif
+int		main(int argc, char **argv)
+{
+	if (argc == 2)
+	{
+		ft_fdf(argv[1]);
+	}
+	else if (argc == 1)
+		ft_putstr("Error : Too few arguments.");
+	else
+		ft_putstr("Error : too much arguments.");
+	return (0);
+}
