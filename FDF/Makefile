@@ -6,13 +6,13 @@
 #    By: pcalime <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/02/21 17:25:48 by pcalime           #+#    #+#              #
-#    Updated: 2016/02/21 17:52:27 by pcalime          ###   ########.fr        #
+#    Updated: 2016/02/23 18:03:33 by pcalime          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
 
-SRC = main.c ft_draw_line.c libft/libft.a
+SRC = fdf.c ft_draw_line.c libft/libft.a
 
 all: $(NAME)
 
