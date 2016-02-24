@@ -6,12 +6,13 @@
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 18:32:12 by pcalime           #+#    #+#             */
-/*   Updated: 2016/02/23 18:02:10 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/02/24 17:59:58 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include <fcntl.h>
+#include "get_next_line.h"
 
 static char	*ft_read(char *str)
 {
@@ -19,21 +20,20 @@ static char	*ft_read(char *str)
 	char	*line;
 	char	*file;
 
-	file = memaloc(sizeof(char) * 1);
+	file = (char *)ft_memalloc(1);
 	fd = open(str, O_RDONLY);
 	if (fd == -1)
 	{
-		ft_putstr("Error : Incorrect file name.");
+		perror("Error");
 		exit(0);
 	}
-	while ((get_next_line(fd, &line)))
+	while (get_next_line(fd, &line) == 1)
 	{
 		file = ft_strjoin(file, line);
-		free(line);
 	}
 	if (close(fd) == -1)
 	{
-		ft_putstr("Error : Close fail.");
+		perror("Error");
 		exit(0);
 	}
 	return (file);
@@ -54,8 +54,10 @@ int			main(int argc, char **argv)
 		ft_fdf(argv[1]);
 	}
 	else if (argc == 1)
-		ft_putstr("Error : Too few arguments.");
+		perror("Error");
+//		ft_putstr("Error : Too few arguments.\n");
 	else
-		ft_putstr("Error : Too much arguments.");
+		perror("Error");
+		//ft_putstr("Error : Too much arguments.\n");
 	return (0);
 }

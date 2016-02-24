@@ -6,30 +6,22 @@
 #    By: pcalime <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/02/21 17:25:48 by pcalime           #+#    #+#              #
-#    Updated: 2016/02/24 17:40:21 by pcalime          ###   ########.fr        #
+#    Updated: 2016/02/23 19:22:52 by pcalime          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
 
-SRC = fdf.c ft_draw_line.c
-
-OBJ = $(SRC:.c=.o)
+SRC = fdf.c ft_draw_line.c libft/libft.a get_next_line.c
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	make -C libft
-	gcc -Wall -Wextra -Werror $(OBJ) -o $(NAME) -lft -L ./libft -lmlx -framework OpenGL -framework AppKit
+$(NAME):
+	gcc -Wall -Wextra -Werror $(SRC) -o $(NAME) -lmlx -framework OpenGL -framework AppKit
 
-%.o:%.c
-	gcc -c -Wall -Wextra -Werror $< -o $@ -Iincludes
 clean:
-	make -C libft/ clean
-	rm -rf $(OBJ)
+	rm -rf $(NAME)
 
 fclean: clean
-	make -C libft/ fclean
-	rm -rf $(NAME)
 
 re: fclean all

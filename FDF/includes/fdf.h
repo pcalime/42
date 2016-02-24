@@ -1,36 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_read.c                                          :+:      :+:    :+:   */
+/*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/08 18:30:16 by pcalime           #+#    #+#             */
-/*   Updated: 2016/02/23 19:22:56 by pcalime          ###   ########.fr       */
+/*   Created: 2016/02/21 17:10:20 by pcalime           #+#    #+#             */
+/*   Updated: 2016/02/24 17:40:54 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef FDF_H
+# define FDF_H
 
-char	*ft_read(char *str)
+# include <mlx.h>
+# include "libft.h"
+# include <stdlib.h>
+# include <stdio.h>
+
+typedef struct	s_data
 {
-	int		fd;
-	int		ret;
-	char	*buf;
+	void		*mlx;
+	void		*win;
+}				t_data;
 
-	buf = malloc(sizeof(char) * BUF_SIZE);
-	fd = open(str, O_RDONLY);
-	if (fd == -1)
-	{
-		ft_putstr("error\n");
-		return (NULL);
-	}
-	ret = read(fd, buf, BUF_SIZE);
-	buf[ret] = '\0';
-	if (close(fd) == -1)
-	{
-		ft_putstr("error\n");
-		return (NULL);
-	}
-	return (buf);
-}
+typedef struct	s_point
+{
+	float		x;
+	float		y;
+}				t_point;
+
+void	ft_draw_line(t_data data, t_point p1, t_point p2);
+
+#endif
