@@ -6,13 +6,39 @@
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 18:32:12 by pcalime           #+#    #+#             */
-/*   Updated: 2016/02/24 17:59:58 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/02/24 18:37:41 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include <fcntl.h>
 #include "get_next_line.h"
+
+char		*ft_fill_file(char *line, char *file)
+{
+	char	*tmp;
+	int		cmpt;
+	int		cmpt2;
+
+	cmpt = 0;
+	cmpt2 = -1;
+	while (line[cmpt] != '\0' && line[cmpt] != '\n')
+		cmpt++;
+	tmp = file;
+	file = (char *)ft_memalloc(sizeof(char) * (ft_strlen(file) + cmpt) + 2);
+	cmpt = -1;
+	while (tmp[++cmpt] != '\0')
+		file[cmpt] = tmp[cmpt];
+	while (line[++cmpt2] != '\0' && line[cmpt2] != '\n')
+	{
+		file[cmpt] = line[cmpt2];
+		cmpt++;
+	}
+	file[cmpt] = '\n';
+	free(tmp);
+	return (file);
+}
+
 
 static char	*ft_read(char *str)
 {
@@ -29,7 +55,8 @@ static char	*ft_read(char *str)
 	}
 	while (get_next_line(fd, &line) == 1)
 	{
-		file = ft_strjoin(file, line);
+		file = ft_fill_file(line, file);
+		free(line);
 	}
 	if (close(fd) == -1)
 	{
@@ -55,9 +82,9 @@ int			main(int argc, char **argv)
 	}
 	else if (argc == 1)
 		perror("Error");
-//		ft_putstr("Error : Too few arguments.\n");
+	//		ft_putstr("Error : Too few arguments.\n");
 	else
 		perror("Error");
-		//ft_putstr("Error : Too much arguments.\n");
+	//ft_putstr("Error : Too much arguments.\n");
 	return (0);
 }
