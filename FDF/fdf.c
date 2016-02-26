@@ -6,7 +6,7 @@
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 18:32:12 by pcalime           #+#    #+#             */
-/*   Updated: 2016/02/24 18:37:41 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/02/26 22:18:53 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,75 @@ static char	*ft_read(char *str)
 	return (file);
 }
 
+static int	ft_count_x(char *str)
+{
+	int		x;
+	int		cmpt;
+	int		cmpt_first_l;
+
+	cmpt = 0;
+	x = 0;
+	cmpt_first_l = 0;
+	while (str[cmpt] != '\n' && str[cmpt])
+	{
+		while (ft_isspace(str[cmpt]) && str[cmpt] && str[cmpt] != '\n')
+			cmpt++;
+		if (str[cmpt] != '\n')
+			cmpt_first_l++;
+		while ((ft_isspace(str[cmpt]) == 0) && str[cmpt])
+			cmpt++;
+	}
+	cmpt++;
+	while (str[cmpt])
+	{
+		while (str[cmpt] != '\n')
+		{
+			while (ft_isspace(str[cmpt]) && str[cmpt] && str[cmpt] != '\n')
+				cmpt++;
+			if (str[cmpt] != '\n')
+				x++;
+			while ((ft_isspace(str[cmpt]) == 0) && str[cmpt])
+				cmpt++;
+		}
+		if (str[cmpt] == '\n')
+		{
+			if (x < cmpt_first_l)
+				return (-1);
+			x = 0;
+			cmpt++;
+		}
+	}
+	return (cmpt_first_l);
+}
+
+static int	ft_count_y(char *str)
+{
+	int		cmpt;
+	int		y;
+
+	cmpt = 0;
+	y = 0;
+	while (str[cmpt])
+	{
+		if (str[cmpt] == '\n')
+			y++;
+		cmpt++;
+	}
+	return (y);
+}
+
 void		ft_fdf(char *str)
 {
 	char	*file;
+	int		x;
+	int		y;
 
 	file = ft_read(str);
-	ft_putstr(file);
+	if ((x = ft_count_x(file)) == -1)
+		exit(0);
+	y = ft_count_y(file);
+
+	
 }
 
 int			main(int argc, char **argv)
