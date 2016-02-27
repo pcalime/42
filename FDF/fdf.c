@@ -6,7 +6,7 @@
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 18:32:12 by pcalime           #+#    #+#             */
-/*   Updated: 2016/02/26 22:18:53 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/02/27 05:25:24 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,18 +123,79 @@ static int	ft_count_y(char *str)
 	return (y);
 }
 
+#include <stdio.h>
+
+static void	ft_fill_tab(int	**tab, char *str, int x, int y)
+{
+	int		cmpt;
+	//char	**split;
+	int		x_cmpt;
+	int		y_cmpt;
+
+	x_cmpt = 0;
+	y_cmpt = 0;
+	cmpt = 0;
+	ft_putstr(str);
+	while (str[cmpt])
+	{
+		if (str[cmpt] == '\n')
+			str[cmpt] = ' ';
+		cmpt++;
+	}
+	//ft_putstr(str);
+	//split = ft_strsplit(str, ' '); // faire strsplit a la main
+	cmpt = 0;
+	ft_putnbr(x);
+	ft_putnbr(y);
+	while (y_cmpt < y)
+	{
+		while (x_cmpt < x)
+		{
+			ft_putstr(" ");
+			ft_putnbr(cmpt);
+	//		ft_putstr(split[cmpt]);
+			tab[y_cmpt][x_cmpt] = 0;//ft_atoi(&str[cmpt]);
+			cmpt++;
+			x_cmpt++;
+		}
+		y_cmpt++;
+		x_cmpt = 0;
+	}
+}
+
+
 void		ft_fdf(char *str)
 {
 	char	*file;
+	int		**tab;
 	int		x;
 	int		y;
+	int		cmpt;
+	int		cmpt2;
 
 	file = ft_read(str);
 	if ((x = ft_count_x(file)) == -1)
 		exit(0);
 	y = ft_count_y(file);
-
-	
+	tab = malloc(sizeof(int *) * y);
+	while (--y > 0)
+		tab[y] = malloc(sizeof(int) * x);
+	y = ft_count_y(file);
+	ft_fill_tab(tab, file, x, y);
+	cmpt = 0;
+	cmpt2 = 0;
+	ft_putstr("pouet");
+	while (cmpt < y)
+	{
+		while (cmpt2 < x)
+		{
+			printf("%d ", tab[cmpt][cmpt2]);
+			cmpt2++;
+		}
+		printf("\n");
+		cmpt++;
+		cmpt2 = 0;
+	}
 }
 
 int			main(int argc, char **argv)
