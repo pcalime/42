@@ -6,7 +6,7 @@
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 18:32:12 by pcalime           #+#    #+#             */
-/*   Updated: 2016/02/27 05:25:24 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/03/10 12:19:17 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,36 @@ static int	ft_count_y(char *str)
 
 #include <stdio.h>
 
-static void	ft_fill_tab(int	**tab, char *str, int x, int y)
+static void		ft_fill_tab(int **tab, char *str, int x, int y)
+{
+	int		cmpt;
+	int		x_cmpt;
+	int		y_cmpt;
+
+	x_cmpt = 0;
+	y_cmpt = 0;
+	cmpt = 0;
+//	ft_putnbr(y);
+//	ft_putnbr(x);
+	while (y_cmpt < y)
+	{
+		while (x_cmpt < x)
+		{
+//			ft_putnbr(y_cmpt);
+//			ft_putnbr(x_cmpt);
+			while (ft_isspace(str[cmpt]))
+				cmpt++;
+			tab[y_cmpt][x_cmpt] = ft_atoi(&str[cmpt]);
+			while (ft_isspace(str[cmpt]) == 0 && str[cmpt])
+				cmpt++;
+			x_cmpt++;
+		}
+		x_cmpt = 0;
+		y_cmpt++;
+	}
+}
+
+/*static void	ft_fill_tab(int	**tab, char *str, int x, int y)
 {
 	int		cmpt;
 	//char	**split;
@@ -162,7 +191,7 @@ static void	ft_fill_tab(int	**tab, char *str, int x, int y)
 		x_cmpt = 0;
 	}
 }
-
+*/
 
 void		ft_fdf(char *str)
 {
@@ -178,7 +207,7 @@ void		ft_fdf(char *str)
 		exit(0);
 	y = ft_count_y(file);
 	tab = malloc(sizeof(int *) * y);
-	while (--y > 0)
+	while (--y >= 0)
 		tab[y] = malloc(sizeof(int) * x);
 	y = ft_count_y(file);
 	ft_fill_tab(tab, file, x, y);
