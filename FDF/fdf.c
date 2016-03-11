@@ -6,13 +6,21 @@
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 18:32:12 by pcalime           #+#    #+#             */
-/*   Updated: 2016/03/10 12:32:19 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/03/11 17:45:10 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include <fcntl.h>
 #include "get_next_line.h"
+
+int			ft_exit_win(int keycode, void *param)
+{
+	param = NULL;
+	if (keycode == 53)
+		exit(0);
+	return (0);
+}
 
 char		*ft_fill_file(char *line, char *file)
 {
@@ -193,6 +201,109 @@ static void		ft_fill_tab(int **tab, char *str, int x, int y)
 }
 */
 
+void			ft_draw_fdf(t_point **tab, int x, int y)
+{
+	int		cmpt;
+	int		cmpt2;
+	t_data	data;
+
+	data.mlx = mlx_init();
+	data.win = mlx_new_window(data.mlx, 1920, 1080, "fdf");
+	cmpt = 0;
+	cmpt2 = 0;
+	while (cmpt2 < y - 1)
+	{
+		while (cmpt < x - 1)
+		{
+			ft_draw_line(data, tab[cmpt2][cmpt], tab[cmpt2 + 1][cmpt]);
+			ft_draw_line(data, tab[cmpt2][cmpt], tab[cmpt2][cmpt + 1]);
+			cmpt++;
+		}
+		cmpt = 0;
+		cmpt2++;
+	}
+	mlx_key_hook(data.win, ft_exit_win, 0);
+	mlx_loop(data.mlx);
+}
+
+static int		ft_calculate_ratio(int x, int y, int **tab) // a finir
+{
+	int		min;
+	int		max;
+	int		cmpt;
+	int		cmpt2;
+	int		hauteur;
+
+	cmpt = 0;
+	cmpt2 = 1;
+	max = tab[0][0];
+	min = tab[0][0];
+	while (cmpt < y)
+	{
+		while (cmpt2 < x)
+		{
+			if (min > tab[cmpt][cmpt2])
+				min = tab[cmpt][cmpt2];
+			if (max < tab[cmpt][cmpt2])
+				max = tab[cmpt][cmpt2];
+			cmpt2++;
+		}
+		cmpt2 = 0;
+		cmpt++;
+	}
+	hauteur = x + y + max - min - 1;
+	hauteur = 1000 / hauteur;
+	printf("%d\n", hauteur);
+	return (hauteur);
+}
+
+static t_point	ft_first_pt(int x, int y, int ratio) //a faire
+{
+	t_point		lol;
+	lol.x = 500;
+	lol.y = 800;
+	x = 3;
+	y += x;
+	ratio = 34;
+	return (lol);
+}
+
+void			ft_create_tab_point(int x, int y, int **tab)
+{
+	int		cmpt;
+	int		cmpt2;
+	t_point	**tab_pts;
+	int		ratio;
+
+	cmpt = -1;
+	tab_pts = (t_point **)malloc(sizeof(t_point *) * y);
+	while (++cmpt < y)
+		tab_pts[cmpt] = malloc(sizeof(int) * x);
+	ratio = ft_calculate_ratio(x, y, tab); // a finir
+	tab_pts[0][0] = ft_first_pt(x, y, ratio);
+	//calculer le premier point(a gauche)
+	//calculer le ratio entre deux pts
+	//remplir le tableau de points
+	cmpt = 1;
+	cmpt2 = 0;
+	while (cmpt2 < y)
+	{
+		while (cmpt < x)
+		{
+			tab_pts[cmpt2][cmpt].x = tab_pts[cmpt2][cmpt - 1].x + ratio;
+			tab_pts[cmpt2][cmpt].y = tab_pts[cmpt2][cmpt - 1].y - ratio - tab[cmpt2][cmpt];
+			cmpt++;
+		}
+		cmpt = 1;
+		cmpt2++;
+		if (cmpt2 == y)
+			break ;
+		tab_pts[cmpt2][0].x = tab_pts[cmpt2 - 1][0].x + ratio - tab[cmpt2][cmpt];
+		tab_pts[cmpt2][0].y = tab_pts[cmpt2 - 1][0].y + ratio;
+	}
+	ft_draw_fdf(tab_pts, x, y);
+}
+
 void		ft_fdf(char *str)
 {
 	char	*file;
@@ -213,7 +324,6 @@ void		ft_fdf(char *str)
 	ft_fill_tab(tab, file, x, y);
 	cmpt = 0;
 	cmpt2 = 0;
-	ft_putstr("pouet");
 	while (cmpt < y)
 	{
 		while (cmpt2 < x)
@@ -225,6 +335,7 @@ void		ft_fdf(char *str)
 		cmpt++;
 		cmpt2 = 0;
 	}
+	ft_create_tab_point(x, y, tab);
 }
 
 int			main(int argc, char **argv)
