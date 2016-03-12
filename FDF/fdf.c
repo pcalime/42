@@ -6,7 +6,7 @@
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 18:32:12 by pcalime           #+#    #+#             */
-/*   Updated: 2016/03/11 17:45:10 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/03/12 17:10:45 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,6 +209,11 @@ void			ft_draw_fdf(t_point **tab, int x, int y)
 
 	data.mlx = mlx_init();
 	data.win = mlx_new_window(data.mlx, 1920, 1080, "fdf");
+			printf("%f,%f ; ", tab[0][2].x, tab[0][2].y);
+			printf("%f,%f ; ", tab[1][2].x, tab[1][2].y);
+			printf("%f,%f ; ", tab[2][0].x, tab[2][0].y);
+			printf("%f,%f ; ", tab[2][1].x, tab[2][1].y);
+			printf("%f,%f ; ", tab[2][2].x, tab[2][2].y);
 	cmpt = 0;
 	cmpt2 = 0;
 	while (cmpt2 < y - 1)
@@ -274,33 +279,45 @@ void			ft_create_tab_point(int x, int y, int **tab)
 	int		cmpt2;
 	t_point	**tab_pts;
 	int		ratio;
+	t_point	first_point;
 
 	cmpt = -1;
 	tab_pts = (t_point **)malloc(sizeof(t_point *) * y);
-	while (++cmpt < y)
+	while (++cmpt <= y)
 		tab_pts[cmpt] = malloc(sizeof(int) * x);
 	ratio = ft_calculate_ratio(x, y, tab); // a finir
-	tab_pts[0][0] = ft_first_pt(x, y, ratio);
+	first_point = ft_first_pt(x, y, ratio);
 	//calculer le premier point(a gauche)
 	//calculer le ratio entre deux pts
 	//remplir le tableau de points
-	cmpt = 1;
+	cmpt = 0;
 	cmpt2 = 0;
 	while (cmpt2 < y)
 	{
 		while (cmpt < x)
 		{
-			tab_pts[cmpt2][cmpt].x = tab_pts[cmpt2][cmpt - 1].x + ratio;
-			tab_pts[cmpt2][cmpt].y = tab_pts[cmpt2][cmpt - 1].y - ratio - tab[cmpt2][cmpt];
+			tab_pts[cmpt2][cmpt].x = first_point.x + ratio * cmpt + ratio * cmpt2;
+			tab_pts[cmpt2][cmpt].y = first_point.y - ratio * cmpt + ratio * cmpt2 - tab[cmpt2][cmpt] * ratio;
+			printf("%f,%f ; ", tab_pts[cmpt2][cmpt].x, tab_pts[cmpt2][cmpt].y);
 			cmpt++;
 		}
-		cmpt = 1;
+		printf("\n");
+		cmpt = 0;
 		cmpt2++;
-		if (cmpt2 == y)
-			break ;
-		tab_pts[cmpt2][0].x = tab_pts[cmpt2 - 1][0].x + ratio - tab[cmpt2][cmpt];
-		tab_pts[cmpt2][0].y = tab_pts[cmpt2 - 1][0].y + ratio;
-	}
+	}/*
+	cmpt = 0;
+	cmpt2 = 0;
+	while (cmpt2 < y)
+	{
+		while (cmpt < x)
+		{
+			printf("%f,%f ; ", tab_pts[cmpt2][cmpt].x, tab_pts[cmpt2][cmpt].y);
+			cmpt++;
+		}
+		printf("\n");
+		cmpt = 0;
+		cmpt2++;
+	}*/
 	ft_draw_fdf(tab_pts, x, y);
 }
 
