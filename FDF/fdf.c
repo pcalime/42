@@ -6,7 +6,7 @@
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 18:32:12 by pcalime           #+#    #+#             */
-/*   Updated: 2016/03/12 17:46:47 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/03/12 18:35:09 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -268,7 +268,30 @@ static t_point	ft_first_pt(int x, int y, int ratio) //a faire
 	return (lol);
 }
 
+void			ft_affich_tab_pts(t_point **tab_pts, int x, int y)
+{
+	int		cmpt;
+	int		cmpt2;
+
+	cmpt = 0;
+	cmpt2 = 0;
+	while (cmpt2 < y) // re affichage
+	{
+		while (cmpt < x)
+		{
+			printf("%f,%f ; ", tab_pts[cmpt2][cmpt].x, tab_pts[cmpt2][cmpt].y);
+			cmpt++;
+		}
+		printf("\n");
+		cmpt = 0;
+		cmpt2++;
+	}
+	printf("\n");
+}
+
 void			ft_create_tab_point(int x, int y, int **tab)
+//creer deux points et les faire tracer des droites
+//tracer d abord horizontal puis vertical
 {
 	int		cmpt;
 	int		cmpt2;
@@ -287,32 +310,24 @@ void			ft_create_tab_point(int x, int y, int **tab)
 	//remplir le tableau de points
 	cmpt = 0;
 	cmpt2 = 0;
+	ft_affich_tab_pts(tab_pts, x, y);
 	while (cmpt2 < y)
 	{
 		while (cmpt < x)
 		{
 			tab_pts[cmpt2][cmpt].x = first_point.x + ratio * cmpt + ratio * cmpt2;
 			tab_pts[cmpt2][cmpt].y = first_point.y - ratio * cmpt + ratio * cmpt2 - tab[cmpt2][cmpt] * ratio;
-			printf("%f,%f ; ", tab_pts[cmpt2][cmpt].x, tab_pts[cmpt2][cmpt].y); //affichage
+			printf("%d,%d\n", cmpt2, cmpt);
+			ft_affich_tab_pts(tab_pts, x, y);
+			//printf("%f,%f ; ", tab_pts[cmpt2][cmpt].x, tab_pts[cmpt2][cmpt].y); //affichage
 			cmpt++;
 		}
-		printf("\n");
+		//printf("\n");
 		cmpt = 0;
 		cmpt2++;
 	}
-	cmpt = 0;
-	cmpt2 = 0;
-	while (cmpt2 < y) // re affichage
-	{
-		while (cmpt < x)
-		{
-			printf("%f,%f ; ", tab_pts[cmpt2][cmpt].x, tab_pts[cmpt2][cmpt].y);
-			cmpt++;
-		}
-		printf("\n");
-		cmpt = 0;
-		cmpt2++;
-	}
+	//printf("\n");
+	ft_affich_tab_pts(tab_pts, x, y);
 	ft_draw_fdf(tab_pts, x, y);
 }
 
