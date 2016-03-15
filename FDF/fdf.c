@@ -6,48 +6,13 @@
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 18:32:12 by pcalime           #+#    #+#             */
-/*   Updated: 2016/03/15 14:39:10 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/03/15 18:15:40 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <fcntl.h>
-#include "get_next_line.h"
 
-int			ft_exit_win(int keycode, void *param)
-{
-	param = NULL;
-	if (keycode == 53)
-		exit(0);
-	return (0);
-}
-/*
-void			ft_draw_fdf(t_point **tab, int x, int y)
-{
-	int		cmpt;
-	int		cmpt2;
-	t_data	data;
-
-	data.mlx = mlx_init();
-	data.win = mlx_new_window(data.mlx, 1920, 1080, "fdf");
-	cmpt = 0;
-	cmpt2 = 0;
-	while (cmpt2 < y - 1)
-	{
-		while (cmpt < x - 1)
-		{
-			ft_draw_line(data, tab[cmpt2][cmpt], tab[cmpt2 + 1][cmpt]);
-			ft_draw_line(data, tab[cmpt2][cmpt], tab[cmpt2][cmpt + 1]);
-			cmpt++;
-		}
-		cmpt = 0;
-		cmpt2++;
-	}
-	mlx_key_hook(data.win, ft_exit_win, 0);
-	mlx_loop(data.mlx);
-}*/
-
-static int		ft_calculate_ratio(int x, int y, int **tab) // a finir
+int		ft_calculate_ratio(int x, int y, int **tab) // a finir
 {
 	int		min;
 	int		max;
@@ -75,146 +40,19 @@ static int		ft_calculate_ratio(int x, int y, int **tab) // a finir
 	hauteur = x + y + max - min - 1;
 	hauteur = 1000 / hauteur;
 	printf("%d\n", hauteur);
-	return (100);
+	return (hauteur);
 }
 
-static t_point	ft_first_pt(int x, int y, int ratio) //a faire
+t_point	ft_first_pt(int x, int y, int ratio) //a faire
 {
 	t_point		lol;
 	lol.x = 500;
-	lol.y = 500;
+	lol.y = 700;
 	x = 3;
 	y += x;
 	ratio = 34;
 	return (lol);
 }
-/*
-void			ft_affich_tab_pts(t_point **tab_pts, int x, int y)
-{
-	int		cmpt;
-	int		cmpt2;
-
-	cmpt = 0;
-	cmpt2 = 0;
-	while (cmpt2 < y) // re affichage
-	{
-		while (cmpt < x)
-		{
-			printf("%f,%f ; ", tab_pts[cmpt2][cmpt].x, tab_pts[cmpt2][cmpt].y);
-			cmpt++;
-		}
-		printf("\n");
-		cmpt = 0;
-		cmpt2++;
-	}
-	printf("\n");
-}*/
-/*
-void			ft_create_tab_point(int x, int y, int **tab)
-//creer deux points et les faire tracer des droites
-//tracer d abord horizontal puis vertical
-{
-	int		cmpt;
-	int		cmpt2;
-	t_point	**tab_pts;
-	int		ratio;
-	t_point	first_point;
-
-	cmpt = -1;
-	tab_pts = (t_point **)malloc(sizeof(t_point *) * y);
-	while (++cmpt <= y)
-		tab_pts[cmpt] = malloc(sizeof(int) * x);
-	ratio = ft_calculate_ratio(x, y, tab); // a finir
-	first_point = ft_first_pt(x, y, ratio);
-	//calculer le premier point(a gauche)
-	//calculer le ratio entre deux pts
-	//remplir le tableau de points
-	cmpt = 0;
-	cmpt2 = 0;
-	ft_affich_tab_pts(tab_pts, x, y);
-	while (cmpt2 < y)
-	{
-		while (cmpt < x)
-		{
-			tab_pts[cmpt2][cmpt].x = first_point.x + ratio * cmpt + ratio * cmpt2;
-			tab_pts[cmpt2][cmpt].y = first_point.y - ratio * cmpt + ratio * cmpt2 - tab[cmpt2][cmpt] * ratio;
-			printf("%d,%d\n", cmpt2, cmpt);
-			ft_affich_tab_pts(tab_pts, x, y);
-			//printf("%f,%f ; ", tab_pts[cmpt2][cmpt].x, tab_pts[cmpt2][cmpt].y); //affichage
-			cmpt++;
-		}
-		//printf("\n");
-		cmpt = 0;
-		cmpt2++;
-	}
-	//printf("\n");
-	ft_affich_tab_pts(tab_pts, x, y);
-	ft_draw_fdf(tab_pts, x, y);
-}
-*/
-
-void	ft_draw_fdf(int x, int y, int **tab)
-{
-	int		cmpt;
-	int		cmpt2;
-	int		ratio;
-	t_point	p1;
-	t_point p2;
-	t_point first_point;
-	t_data data;
-
-	data.mlx = mlx_init();
-	data.win = mlx_new_window(data.mlx, 1920, 1080, "fdf");
-	ratio = ft_calculate_ratio(x, y, tab);
-	first_point = ft_first_pt(x, y, ratio);
-	cmpt = 0;
-	cmpt2 = 0;
-	printf("x = %d\n", x);
-	printf("y = %d\n", y);
-	while (cmpt2 < y) // traits horizontaux
-	{
-		while (cmpt < x - 1)
-		{
-			ft_putstr("pouet");
-			p1.x = first_point.x + ratio * cmpt;
-			p1.y = first_point.y - ratio * cmpt - tab[cmpt2][cmpt] * ratio;
-			p2.x = first_point.x + ratio * (cmpt + 1);
-			p2.y = first_point.y - ratio * (cmpt + 1)- tab[cmpt2][cmpt + 1] * ratio;
-			printf("%f,%f ; %f,%f || ", p1.x, p1.y, p2.x, p2.y);
-			ft_draw_line(data, p1, p2);
-			cmpt++;
-		}
-		printf("\n");
-		first_point.x += ratio;
-		first_point.y += ratio;
-		cmpt2++;
-		cmpt = 0;
-	}
-	first_point = ft_first_pt(x, y, ratio);
-	cmpt2 = 0;
-	while (cmpt < x) // traits verticaux
-	{
-		while (cmpt2 < y - 1)
-		{
-
-			p1.x = first_point.x + ratio * cmpt2;
-			p1.y = first_point.y + ratio * cmpt2 - tab[cmpt2][cmpt] * ratio;
-			p2.x = first_point.x + ratio * (cmpt2 + 1);
-			p2.y = first_point.y + ratio * (cmpt2 + 1) - tab[cmpt2 + 1][cmpt] * ratio;
-			printf("%f,%f ; %f,%f || ", p1.x, p1.y, p2.x, p2.y);
-			ft_draw_line(data, p1, p2);
-			cmpt2++;
-		}
-		printf("\n");
-		first_point.x += ratio;
-		first_point.y -= ratio;
-		cmpt++;
-		cmpt2 = 0;
-	}
-	mlx_key_hook(data.win, ft_exit_win, 0);
-	mlx_loop(data.mlx);
-}
-
 
 void		ft_fdf(char *str)
 {

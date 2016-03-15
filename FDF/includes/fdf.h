@@ -6,7 +6,7 @@
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/21 17:10:20 by pcalime           #+#    #+#             */
-/*   Updated: 2016/03/15 13:28:37 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/03/15 18:07:27 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,8 @@ char	*ft_read(char *str);
 int		ft_count_x(char *str);
 int		ft_count_y(char *str);
 void	ft_fill_tab(int **tab, char *str, int x, int y);
+int		ft_calculate_ratio(int x, int y, int **tab);
+t_point	ft_first_pt(int x, int y, int ratio);
+void	ft_draw_fdf(int x, int y, int **tab);
 
 #endif
