@@ -6,7 +6,7 @@
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/21 17:10:20 by pcalime           #+#    #+#             */
-/*   Updated: 2016/03/11 14:36:34 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/03/15 13:28:37 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 
 # include <mlx.h>
 # include "libft.h"
+# include "get_next_line.h"
 # include <stdlib.h>
+# include <fcntl.h>
 # include <stdio.h>
 
 typedef struct	s_data
@@ -31,5 +33,9 @@ typedef struct	s_point
 }				t_point;
 
 void	ft_draw_line(t_data data, t_point p1, t_point p2);
+char	*ft_read(char *str);
+int		ft_count_x(char *str);
+int		ft_count_y(char *str);
+void	ft_fill_tab(int **tab, char *str, int x, int y);
 
 #endif

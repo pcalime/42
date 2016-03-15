@@ -6,7 +6,7 @@
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 18:32:12 by pcalime           #+#    #+#             */
-/*   Updated: 2016/03/12 18:35:09 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/03/15 14:16:40 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,186 +21,7 @@ int			ft_exit_win(int keycode, void *param)
 		exit(0);
 	return (0);
 }
-
-char		*ft_fill_file(char *line, char *file)
-{
-	char	*tmp;
-	int		cmpt;
-	int		cmpt2;
-
-	cmpt = 0;
-	cmpt2 = -1;
-	while (line[cmpt] != '\0' && line[cmpt] != '\n')
-		cmpt++;
-	tmp = file;
-	file = (char *)ft_memalloc(sizeof(char) * (ft_strlen(file) + cmpt) + 2);
-	cmpt = -1;
-	while (tmp[++cmpt] != '\0')
-		file[cmpt] = tmp[cmpt];
-	while (line[++cmpt2] != '\0' && line[cmpt2] != '\n')
-	{
-		file[cmpt] = line[cmpt2];
-		cmpt++;
-	}
-	file[cmpt] = '\n';
-	free(tmp);
-	return (file);
-}
-
-
-static char	*ft_read(char *str)
-{
-	int		fd;
-	char	*line;
-	char	*file;
-
-	file = (char *)ft_memalloc(1);
-	fd = open(str, O_RDONLY);
-	if (fd == -1)
-	{
-		perror("Error");
-		exit(0);
-	}
-	while (get_next_line(fd, &line) == 1)
-	{
-		file = ft_fill_file(line, file);
-		free(line);
-	}
-	if (close(fd) == -1)
-	{
-		perror("Error");
-		exit(0);
-	}
-	return (file);
-}
-
-static int	ft_count_x(char *str)
-{
-	int		x;
-	int		cmpt;
-	int		cmpt_first_l;
-
-	cmpt = 0;
-	x = 0;
-	cmpt_first_l = 0;
-	while (str[cmpt] != '\n' && str[cmpt])
-	{
-		while (ft_isspace(str[cmpt]) && str[cmpt] && str[cmpt] != '\n')
-			cmpt++;
-		if (str[cmpt] != '\n')
-			cmpt_first_l++;
-		while ((ft_isspace(str[cmpt]) == 0) && str[cmpt])
-			cmpt++;
-	}
-	cmpt++;
-	while (str[cmpt])
-	{
-		while (str[cmpt] != '\n')
-		{
-			while (ft_isspace(str[cmpt]) && str[cmpt] && str[cmpt] != '\n')
-				cmpt++;
-			if (str[cmpt] != '\n')
-				x++;
-			while ((ft_isspace(str[cmpt]) == 0) && str[cmpt])
-				cmpt++;
-		}
-		if (str[cmpt] == '\n')
-		{
-			if (x < cmpt_first_l)
-				return (-1);
-			x = 0;
-			cmpt++;
-		}
-	}
-	return (cmpt_first_l);
-}
-
-static int	ft_count_y(char *str)
-{
-	int		cmpt;
-	int		y;
-
-	cmpt = 0;
-	y = 0;
-	while (str[cmpt])
-	{
-		if (str[cmpt] == '\n')
-			y++;
-		cmpt++;
-	}
-	return (y);
-}
-
-#include <stdio.h>
-
-static void		ft_fill_tab(int **tab, char *str, int x, int y)
-{
-	int		cmpt;
-	int		x_cmpt;
-	int		y_cmpt;
-
-	x_cmpt = 0;
-	y_cmpt = 0;
-	cmpt = 0;
-//	ft_putnbr(y);
-//	ft_putnbr(x);
-	while (y_cmpt < y)
-	{
-		while (x_cmpt < x)
-		{
-//			ft_putnbr(y_cmpt);
-//			ft_putnbr(x_cmpt);
-			while (ft_isspace(str[cmpt]))
-				cmpt++;
-			tab[y_cmpt][x_cmpt] = ft_atoi(&str[cmpt]);
-			while (ft_isspace(str[cmpt]) == 0 && str[cmpt])
-				cmpt++;
-			x_cmpt++;
-		}
-		x_cmpt = 0;
-		y_cmpt++;
-	}
-}
-
-/*static void	ft_fill_tab(int	**tab, char *str, int x, int y)
-{
-	int		cmpt;
-	//char	**split;
-	int		x_cmpt;
-	int		y_cmpt;
-
-	x_cmpt = 0;
-	y_cmpt = 0;
-	cmpt = 0;
-	ft_putstr(str);
-	while (str[cmpt])
-	{
-		if (str[cmpt] == '\n')
-			str[cmpt] = ' ';
-		cmpt++;
-	}
-	//ft_putstr(str);
-	//split = ft_strsplit(str, ' '); // faire strsplit a la main
-	cmpt = 0;
-	ft_putnbr(x);
-	ft_putnbr(y);
-	while (y_cmpt < y)
-	{
-		while (x_cmpt < x)
-		{
-			ft_putstr(" ");
-			ft_putnbr(cmpt);
-	//		ft_putstr(split[cmpt]);
-			tab[y_cmpt][x_cmpt] = 0;//ft_atoi(&str[cmpt]);
-			cmpt++;
-			x_cmpt++;
-		}
-		y_cmpt++;
-		x_cmpt = 0;
-	}
-}
-*/
-
+/*
 void			ft_draw_fdf(t_point **tab, int x, int y)
 {
 	int		cmpt;
@@ -224,7 +45,7 @@ void			ft_draw_fdf(t_point **tab, int x, int y)
 	}
 	mlx_key_hook(data.win, ft_exit_win, 0);
 	mlx_loop(data.mlx);
-}
+}*/
 
 static int		ft_calculate_ratio(int x, int y, int **tab) // a finir
 {
@@ -254,20 +75,20 @@ static int		ft_calculate_ratio(int x, int y, int **tab) // a finir
 	hauteur = x + y + max - min - 1;
 	hauteur = 1000 / hauteur;
 	printf("%d\n", hauteur);
-	return (hauteur);
+	return (100);
 }
 
 static t_point	ft_first_pt(int x, int y, int ratio) //a faire
 {
 	t_point		lol;
 	lol.x = 500;
-	lol.y = 800;
+	lol.y = 500;
 	x = 3;
 	y += x;
 	ratio = 34;
 	return (lol);
 }
-
+/*
 void			ft_affich_tab_pts(t_point **tab_pts, int x, int y)
 {
 	int		cmpt;
@@ -287,8 +108,8 @@ void			ft_affich_tab_pts(t_point **tab_pts, int x, int y)
 		cmpt2++;
 	}
 	printf("\n");
-}
-
+}*/
+/*
 void			ft_create_tab_point(int x, int y, int **tab)
 //creer deux points et les faire tracer des droites
 //tracer d abord horizontal puis vertical
@@ -330,6 +151,71 @@ void			ft_create_tab_point(int x, int y, int **tab)
 	ft_affich_tab_pts(tab_pts, x, y);
 	ft_draw_fdf(tab_pts, x, y);
 }
+*/
+
+void	ft_draw_fdf(int x, int y, int **tab)
+{
+	int		cmpt;
+	int		cmpt2;
+	int		ratio;
+	t_point	p1;
+	t_point p2;
+	t_point first_point;
+	t_data data;
+
+	data.mlx = mlx_init();
+	data.win = mlx_new_window(data.mlx, 1920, 1080, "fdf");
+	ratio = ft_calculate_ratio(x, y, tab);
+	first_point = ft_first_pt(x, y, ratio);
+	cmpt = 0;
+	cmpt2 = 0;
+	printf("x = %d\n", x);
+	printf("y = %d\n", y);
+	while (cmpt2 < y) // traits horizontaux
+	{
+		while (cmpt < x - 1)
+		{
+			ft_putstr("pouet");
+			p1.x = first_point.x + ratio * cmpt;
+			p1.y = first_point.y - ratio * cmpt - tab[cmpt2][cmpt] * ratio;
+			p2.x = first_point.x + ratio * (cmpt + 1);
+			p2.y = first_point.y - ratio * (cmpt + 1)- tab[cmpt2][cmpt + 1] * ratio;
+			printf("%f,%f ; %f,%f || ", p1.x, p1.y, p2.x, p2.y);
+			ft_draw_line(data, p1, p2);
+			cmpt++;
+		}
+		ft_putstr("pouet");
+		printf("\n");
+		first_point.x += ratio;
+		first_point.y += ratio;
+		cmpt2++;
+		cmpt = 0;
+	}
+	first_point = ft_first_pt(x, y, ratio);
+	cmpt2 = 0;
+	while (cmpt < x)
+	{
+		while (cmpt < y - 1)
+		{
+
+			p1.x = first_point.x + ratio * cmpt2;
+			p1.y = first_point.y + ratio * cmpt2 - tab[cmpt2][cmpt] * ratio;
+			p2.x = first_point.x + ratio * (cmpt2 + 1);
+			p2.y = first_point.y + ratio * (cmpt2 + 1) - tab[cmpt2 + 1][cmpt] * ratio;
+			printf("%f,%f ; %f,%f || ", p1.x, p1.y, p2.x, p2.y);
+			ft_draw_line(data, p1, p2);
+			cmpt++;
+		}
+		printf("\n");
+		first_point.x += ratio;
+		first_point.y -= ratio;
+		cmpt2++;
+		cmpt = 0;
+	}
+	mlx_key_hook(data.win, ft_exit_win, 0);
+	mlx_loop(data.mlx);
+}
+
 
 void		ft_fdf(char *str)
 {
@@ -362,7 +248,7 @@ void		ft_fdf(char *str)
 		cmpt++;
 		cmpt2 = 0;
 	}
-	ft_create_tab_point(x, y, tab);
+	ft_draw_fdf(x, y, tab);
 }
 
 int			main(int argc, char **argv)

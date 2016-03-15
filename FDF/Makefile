@@ -6,13 +6,13 @@
 #    By: pcalime <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/02/21 17:25:48 by pcalime           #+#    #+#              #
-#    Updated: 2016/03/12 16:12:22 by pcalime          ###   ########.fr        #
+#    Updated: 2016/03/15 13:17:50 by pcalime          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
 
-SRC = fdf.c ft_draw_line.c
+SRC = ft_fill_tab_int.c ft_read_file.c fdf.c ft_draw_line.c
 
 OBJ = $(SRC:.c=.o)
 

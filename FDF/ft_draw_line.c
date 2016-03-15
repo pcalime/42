@@ -6,13 +6,13 @@
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/08 18:18:08 by pcalime           #+#    #+#             */
-/*   Updated: 2016/03/12 15:50:51 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/03/15 13:18:42 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	ft_draw_line_x(t_data data, t_point p1, t_point p2, float slope)
+static void	ft_draw_line_x(t_data data, t_point p1, t_point p2, float slope)
 {
 	float	x;
 	float	y;
@@ -27,7 +27,7 @@ void	ft_draw_line_x(t_data data, t_point p1, t_point p2, float slope)
 	}
 }
 
-void	ft_draw_line_y(t_data data, t_point p1, t_point p2, float slope)
+static void	ft_draw_line_y(t_data data, t_point p1, t_point p2, float slope)
 {
 	float	x;
 	float	y;
@@ -42,7 +42,7 @@ void	ft_draw_line_y(t_data data, t_point p1, t_point p2, float slope)
 	}
 }
 
-void	ft_draw_line(t_data data, t_point p1, t_point p2)
+void		ft_draw_line(t_data data, t_point p1, t_point p2)
 {
 	float	slope;
 	t_point swap;
