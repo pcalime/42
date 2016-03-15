@@ -6,7 +6,7 @@
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 18:32:12 by pcalime           #+#    #+#             */
-/*   Updated: 2016/03/15 14:16:40 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/03/15 14:39:10 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,7 +184,6 @@ void	ft_draw_fdf(int x, int y, int **tab)
 			ft_draw_line(data, p1, p2);
 			cmpt++;
 		}
-		ft_putstr("pouet");
 		printf("\n");
 		first_point.x += ratio;
 		first_point.y += ratio;
@@ -193,9 +192,9 @@ void	ft_draw_fdf(int x, int y, int **tab)
 	}
 	first_point = ft_first_pt(x, y, ratio);
 	cmpt2 = 0;
-	while (cmpt < x)
+	while (cmpt < x) // traits verticaux
 	{
-		while (cmpt < y - 1)
+		while (cmpt2 < y - 1)
 		{
 
 			p1.x = first_point.x + ratio * cmpt2;
@@ -204,13 +203,13 @@ void	ft_draw_fdf(int x, int y, int **tab)
 			p2.y = first_point.y + ratio * (cmpt2 + 1) - tab[cmpt2 + 1][cmpt] * ratio;
 			printf("%f,%f ; %f,%f || ", p1.x, p1.y, p2.x, p2.y);
 			ft_draw_line(data, p1, p2);
-			cmpt++;
+			cmpt2++;
 		}
 		printf("\n");
 		first_point.x += ratio;
 		first_point.y -= ratio;
-		cmpt2++;
-		cmpt = 0;
+		cmpt++;
+		cmpt2 = 0;
 	}
 	mlx_key_hook(data.win, ft_exit_win, 0);
 	mlx_loop(data.mlx);
