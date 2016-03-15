@@ -6,13 +6,13 @@
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 18:32:12 by pcalime           #+#    #+#             */
-/*   Updated: 2016/03/15 18:15:40 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/03/15 20:01:51 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int		ft_calculate_ratio(int x, int y, int **tab) // a finir
+int			ft_calculate_ratio(int x, int y, int **tab)
 {
 	int		min;
 	int		max;
@@ -43,9 +43,10 @@ int		ft_calculate_ratio(int x, int y, int **tab) // a finir
 	return (hauteur);
 }
 
-t_point	ft_first_pt(int x, int y, int ratio) //a faire
+t_point		ft_first_pt(int x, int y, int ratio)
 {
 	t_point		lol;
+
 	lol.x = 500;
 	lol.y = 700;
 	x = 3;
@@ -60,8 +61,6 @@ void		ft_fdf(char *str)
 	int		**tab;
 	int		x;
 	int		y;
-	int		cmpt;
-	int		cmpt2;
 
 	file = ft_read(str);
 	if ((x = ft_count_x(file)) == -1)
@@ -72,19 +71,6 @@ void		ft_fdf(char *str)
 		tab[y] = malloc(sizeof(int) * x);
 	y = ft_count_y(file);
 	ft_fill_tab(tab, file, x, y);
-	cmpt = 0;
-	cmpt2 = 0;
-	while (cmpt < y)
-	{
-		while (cmpt2 < x)
-		{
-			printf("%d ", tab[cmpt][cmpt2]);
-			cmpt2++;
-		}
-		printf("\n");
-		cmpt++;
-		cmpt2 = 0;
-	}
 	ft_draw_fdf(x, y, tab);
 }
 
@@ -95,10 +81,8 @@ int			main(int argc, char **argv)
 		ft_fdf(argv[1]);
 	}
 	else if (argc == 1)
-		perror("Error");
-	//		ft_putstr("Error : Too few arguments.\n");
+		ft_putstr("Error : Too few arguments.\n");
 	else
-		perror("Error");
-	//ft_putstr("Error : Too much arguments.\n");
+		ft_putstr("Error : Too much arguments.\n");
 	return (0);
 }

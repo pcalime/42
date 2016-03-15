@@ -6,31 +6,17 @@
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/15 13:14:30 by pcalime           #+#    #+#             */
-/*   Updated: 2016/03/15 13:25:01 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/03/15 19:15:44 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int		ft_count_x(char *str)
+static int	ft_count_x_2(char *str, int cmpt, int cmpt_first_l)
 {
 	int		x;
-	int		cmpt;
-	int		cmpt_first_l;
 
-	cmpt = 0;
 	x = 0;
-	cmpt_first_l = 0;
-	while (str[cmpt] != '\n' && str[cmpt])
-	{
-		while (ft_isspace(str[cmpt]) && str[cmpt] && str[cmpt] != '\n')
-			cmpt++;
-		if (str[cmpt] != '\n')
-			cmpt_first_l++;
-		while ((ft_isspace(str[cmpt]) == 0) && str[cmpt])
-			cmpt++;
-	}
-	cmpt++;
 	while (str[cmpt])
 	{
 		while (str[cmpt] != '\n')
@@ -50,10 +36,35 @@ int		ft_count_x(char *str)
 			cmpt++;
 		}
 	}
-	return (cmpt_first_l);
+	return (1);
 }
 
-int		ft_count_y(char *str)
+int			ft_count_x(char *str)
+{
+	int		x;
+	int		cmpt;
+	int		cmpt_first_l;
+
+	cmpt = 0;
+	x = 0;
+	cmpt_first_l = 0;
+	while (str[cmpt] != '\n' && str[cmpt])
+	{
+		while (ft_isspace(str[cmpt]) && str[cmpt] && str[cmpt] != '\n')
+			cmpt++;
+		if (str[cmpt] != '\n')
+			cmpt_first_l++;
+		while ((ft_isspace(str[cmpt]) == 0) && str[cmpt])
+			cmpt++;
+	}
+	cmpt++;
+	if (ft_count_x_2(str, cmpt, cmpt_first_l) == 1)
+		return (cmpt_first_l);
+	else
+		return (-1);
+}
+
+int			ft_count_y(char *str)
 {
 	int		cmpt;
 	int		y;
@@ -69,7 +80,7 @@ int		ft_count_y(char *str)
 	return (y);
 }
 
-void	ft_fill_tab(int **tab, char *str, int x, int y)
+void		ft_fill_tab(int **tab, char *str, int x, int y)
 {
 	int		cmpt;
 	int		x_cmpt;

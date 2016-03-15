@@ -6,12 +6,11 @@
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/15 13:11:13 by pcalime           #+#    #+#             */
-/*   Updated: 2016/03/15 13:28:39 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/03/15 20:01:46 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
 
 static char	*ft_fill_file(char *line, char *file)
 {
@@ -37,7 +36,6 @@ static char	*ft_fill_file(char *line, char *file)
 	free(tmp);
 	return (file);
 }
-
 
 char		*ft_read(char *str)
 {
