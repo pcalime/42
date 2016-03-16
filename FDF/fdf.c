@@ -6,7 +6,7 @@
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 18:32:12 by pcalime           #+#    #+#             */
-/*   Updated: 2016/03/15 20:09:37 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/03/16 15:17:11 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int			ft_calculate_ratio(int x, int y, int **tab)
 	int		max;
 	int		cmpt;
 	int		cmpt2;
-	int		hauteur;
 
 	cmpt = 0;
 	cmpt2 = 1;
@@ -37,22 +36,18 @@ int			ft_calculate_ratio(int x, int y, int **tab)
 		cmpt2 = 0;
 		cmpt++;
 	}
-	hauteur = x + y + max - min - 1;
-	hauteur = 1000 / hauteur;
-	printf("%d\n", hauteur);
-	return (hauteur);
+	cmpt2 = x + y + max / 3 - min / 3 - 1;
+	cmpt2 = 1000 / cmpt2;
+	return (cmpt2);
 }
 
 t_point		ft_first_pt(int x, int y, int ratio)
 {
-	t_point		lol;
+	t_point		f_p;
 
-	lol.x = 500;
-	lol.y = 700;
-	x = 3;
-	y += x;
-	ratio = 34;
-	return (lol);
+	f_p.x = (1920 - ratio * (x + y)) / 2;
+	f_p.y = ((1080 - ratio * (x + y)) / 2) + ratio * x;
+	return (f_p);
 }
 
 void		ft_fdf(char *str)
