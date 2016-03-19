@@ -6,7 +6,7 @@
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/19 14:36:39 by pcalime           #+#    #+#             */
-/*   Updated: 2016/03/19 15:24:17 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/03/19 19:27:16 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,12 @@
 # include "libft.h"
 # include "get_next_line.h"
 # include <stdlib.h>
+# include <stdio.h>
 
+typedef struct	s_data
+{
+	void		*mlx;
+	void		*win;
+}				t_data;
 
 #endif
