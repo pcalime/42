@@ -6,7 +6,7 @@
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/26 18:36:46 by pcalime           #+#    #+#             */
-/*   Updated: 2016/03/21 20:15:26 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/03/21 21:00:22 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int			ft_strequ(char const *s1, char const *s2);
 int			ft_strnequ(char const *s1, char const *s2, size_t n);
 int			ft_isspace(int c);
 int			ft_countwords(const char *str);
+int			convert_bit_to_char(char *str);
 
 char		*ft_strdup(const char *s);
 char		*ft_strndup(const char *s1, size_t len);
