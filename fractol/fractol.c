@@ -6,12 +6,12 @@
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/19 14:58:12 by pcalime           #+#    #+#             */
-/*   Updated: 2016/03/19 19:19:09 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/03/21 17:51:51 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-
+/*
 int		ft_exit_win(int keycode, void *param)
 {
 	param = NULL;
@@ -29,13 +29,13 @@ int		ft_mouse_ride(int x, int y, void *param)
 	}
 	return (0);
 }	
-
+*/
 void	ft_mandelbrot()
 {
 	ft_putstr("1");
 }
 
-
+/*
 
 void	ft_julia()
 {
@@ -89,7 +89,7 @@ void	ft_julia()
 	mlx_key_hook(data.win, ft_exit_win, 0);
 	mlx_loop(data.mlx);
 }
-
+*/
 void	ft_fractale3()
 {
 	ft_putstr("3");
