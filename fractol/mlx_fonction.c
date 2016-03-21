@@ -6,7 +6,7 @@
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/21 17:39:09 by pcalime           #+#    #+#             */
-/*   Updated: 2016/03/21 18:39:30 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/03/21 20:59:19 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,29 +25,25 @@ int		ft_mouse_ride(int x, int y, void *param)
 	param = NULL;
 	x = 12;
 	y = 4;
-//	if (x <= 1920 && x >= 0 && y <= 1080 && y >= 0)
-//		printf("x = %d ; y = %d\n", x, y);
+	//	if (x <= 1920 && x >= 0 && y <= 1080 && y >= 0)
+	//		printf("x = %d ; y = %d\n", x, y);
 	return (0);
 }
 
-static char	*convert_int_to_bit(int nbr)
+int	convert_bit_to_char(char *str)
 {
-	int		cmpt;
-	int		cmpt2;
-	char	*ret;
+	int	ret;
 
-	ret = (char *)ft_memalloc(sizeof(char) * 25);
-	if (nbr < 0)
-		return (ft_strdup("0"));
-	cmpt = 2147483648;
-	cmpt2 = 1;
-	ret[0] = '0';
-	while (cmpt > 0)
-	{
-		ret[cmpt] = nbr % cmpt + 48;
-		cmpt /= 2;
-		cmpt2++;
-	}
+	ret = 0;
+	ret += (str[0] - 48) * 128;
+	ret += (str[1] - 48) * 64;
+	ret += (str[2] - 48) * 32;
+	ret += (str[3] - 48) * 16;
+	ret += (str[4] - 48) * 8;
+	ret += (str[5] - 48) * 4;
+	ret += (str[6] - 48) * 2;
+	ret += (str[7] - 48);
+	return (ret);
 }
 
 void	put_pixel_to_img(t_data *data, int x, int y, int color)
@@ -56,13 +52,14 @@ void	put_pixel_to_img(t_data *data, int x, int y, int color)
 	int		color_red;
 	int		color_green;
 	int		color_blue;
+
 	color_bit = convert_int_to_bit(color);
-	printf("color_bit = %s", color_bit);
-	color_red = (color - 256 * 256) % (256 * 256 * 256);
-	color_green = (color - 256) % (256 * 256);
-	color_blue = color % 256;
+	printf("color_bit = %s ; ", color_bit);
+	color_red = convert_bit_to_char(&color_bit[8]);
+	color_green = convert_bit_to_char(&color_bit[16]);
+	color_blue = convert_bit_to_char(&color_bit[24]);
 	printf("color = %d , red = %d , green = %d , blue = %d\n", color, color_red, color_green, color_blue);
-	data->img_data[x * data->deca_nbit + (y * data->line)] = (char)color_red;
+	data->img_data[x * data->deca_nbit + (y * data->line)] = (char)color_blue;
 	data->img_data[x * data->deca_nbit + (y * data->line) + 1] = (char)color_green;
-	data->img_data[x * data->deca_nbit + (y * data->line) + 2] = (char)color_blue;
+	data->img_data[x * data->deca_nbit + (y * data->line) + 2] = (char)color_red;
 }

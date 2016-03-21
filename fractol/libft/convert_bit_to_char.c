@@ -1,39 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   convert_bit_to_char.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/26 14:56:32 by pcalime           #+#    #+#             */
-/*   Updated: 2016/03/21 20:09:17 by pcalime          ###   ########.fr       */
+/*   Created: 2016/03/21 20:54:53 by pcalime           #+#    #+#             */
+/*   Updated: 2016/03/21 20:57:53 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_atoi(const char *str)
+int		convert_bit_to_char(char *str)
 {
-	int cmpt;
-	int number;
-	int negative;
+	int	ret;
 
-	number = 0;
-	cmpt = 0;
-	negative = 1;
-	while (ft_isspace(str[cmpt]))
-		cmpt++;
-	if (str[cmpt] == '-')
-	{
-		negative = -1;
-	}
-	if (str[cmpt] == '+' || str[cmpt] == '-')
-		cmpt++;
-	while (str[cmpt] >= '0' && str[cmpt] <= '9')
-	{
-		number *= 10;
-		number += str[cmpt] - 48;
-		cmpt++;
-	}
-	return (number *= negative);
+	ret = 0;
+	ret += (str[0] - 48) * 128;
+	ret += (str[1] - 48) * 64;
+	ret += (str[2] - 48) * 32;
+	ret += (str[3] - 48) * 16;
+	ret += (str[4] - 48) * 8;
+	ret += (str[5] - 48) * 4;
+	ret += (str[6] - 48) * 2;
+	ret += (str[7] - 48);
+	return (ret);
 }

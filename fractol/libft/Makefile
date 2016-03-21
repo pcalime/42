@@ -6,7 +6,7 @@
 #    By: pcalime <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/30 19:25:23 by pcalime           #+#    #+#              #
-#    Updated: 2016/02/24 17:39:25 by pcalime          ###   ########.fr        #
+#    Updated: 2016/03/21 20:59:04 by pcalime          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ SRC = ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c\
 	  ft_strequ.c ft_strnequ.c ft_strsub.c ft_strjoin.c ft_strtrim.c \
 	  ft_itoa.c ft_strsplit.c ft_putchar_fd.c ft_putnbr.c ft_putnbr_fd.c\
 	  ft_putstr.c ft_putstr_fd.c ft_putendl.c ft_putendl_fd.c ft_strndup.c\
-	  ft_countwords.c get_next_line.c
+	  ft_countwords.c get_next_line.c ft_convert_int_to_bit.c\
+	  convert_bit_to_char.c
 
 OBJ = $(SRC:.c=.o)
 
