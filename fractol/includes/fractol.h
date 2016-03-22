@@ -6,7 +6,7 @@
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/19 14:36:39 by pcalime           #+#    #+#             */
-/*   Updated: 2016/03/22 13:48:24 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/03/22 15:12:47 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct	s_fract
 }				t_fract;
 
 void			ft_julia();
+void			ft_mandelbrot();
 int				ft_exit_win(int keycode, void *param);
 int				ft_mouse_ride(int x, int y, void *param);
 void			put_pixel_to_img(t_data *data, int x, int y, int color);

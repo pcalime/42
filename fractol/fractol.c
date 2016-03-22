@@ -22,20 +22,14 @@ int		ft_exit_win(int keycode, void *param)
 
 int		ft_mouse_ride(int x, int y, void *param)
 {
-	param = NULL; 
+	param = NULL;
 	if (x <= 1920 && x >= 0 && y <= 1080 && y >= 0)
 	{
 		printf("x = %d ; y = %d\n", x, y);
 	}
 	return (0);
-}	
-*/
-void	ft_mandelbrot()
-{
-	ft_putstr("1");
 }
 
-/*
 
 void	ft_julia()
 {

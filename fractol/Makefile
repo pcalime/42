@@ -6,13 +6,13 @@
 #    By: pcalime <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/02/21 17:25:48 by pcalime           #+#    #+#              #
-#    Updated: 2016/03/21 17:47:02 by pcalime          ###   ########.fr        #
+#    Updated: 2016/03/22 15:12:28 by pcalime          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fractol
 
-SRC = fractol.c julia.c mlx_fonction.c
+SRC = fractol.c julia.c mandelbrot.c mlx_fonction.c
 
 OBJ = $(SRC:.c=.o)
 

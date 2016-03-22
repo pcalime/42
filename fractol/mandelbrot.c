@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   julia.c                                            :+:      :+:    :+:   */
+/*   mandelbrot.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/21 16:57:04 by pcalime           #+#    #+#             */
-/*   Updated: 2016/03/22 15:04:33 by pcalime          ###   ########.fr       */
+/*   Created: 2016/03/22 15:03:24 by pcalime           #+#    #+#             */
+/*   Updated: 2016/03/22 15:04:30 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static t_fract	ft_init_julia(void)
+static t_fract	ft_init_mandelbrot(void)
 {
 	t_fract	ret;
-	ret.x1 = -1;
-	ret.x2 = 1;
+	ret.x1 = -2.1;
+	ret.x2 = 0.6;
 	ret.y1 = -1.2;
 	ret.y2 = 1.2;
 	ret.image_x = 800;
@@ -28,13 +28,13 @@ static t_fract	ft_init_julia(void)
 	ret.c_i = 0;
 	ret.z_r = 0;
 	ret.z_i = 0;
-	ret.tmp_r = 0.285;
-	ret.tmp_i = 0.01;
+	ret.tmp_r = 0;
+	ret.tmp_i = 0;
 	ret.i = 0;
 	return (ret);
 }
 
-static void		ft_julia_img(t_data *data, t_fract ft)
+static void		ft_mandelbrot_img(t_data *data, t_fract ft)
 {
 	double	x;
 	double	y;
@@ -46,10 +46,10 @@ static void		ft_julia_img(t_data *data, t_fract ft)
 		y = 0;
 		while (y < ft.image_y)
 		{
-			ft.z_r = x / ft.zoom_x + ft.x1;
-			ft.z_i = y / ft.zoom_y + ft.y1;
-			ft.c_r = ft.tmp_r;
-			ft.c_i = ft.tmp_i;
+			ft.c_r = x / ft.zoom_x + ft.x1;
+			ft.c_i = y / ft.zoom_y + ft.y1;
+			ft.z_r = ft.tmp_r;
+			ft.z_i = ft.tmp_i;
 			ft.i = 0;
 			while (ft.z_r * ft.z_r + ft.z_i * ft.z_i < 4 && ft.i < ft.imax)
 			{
@@ -68,19 +68,19 @@ static void		ft_julia_img(t_data *data, t_fract ft)
 	}
 }
 
-void			ft_julia()
+void			ft_mandelbrot()
 {
 	t_data	data;
 	t_fract	fract;
 
-	fract = ft_init_julia();
+	fract = ft_init_mandelbrot();
 	data.mlx = mlx_init();
 	data.win = mlx_new_window(data.mlx, 1920, 1080, "julia");
 	data.img = mlx_new_image(data.mlx, 1920, 1080);
 	data.img_data = mlx_get_data_addr(data.img, &data.nbit, &data.line, &data.endian);
 	data.deca_nbit = data.nbit >> 3;
 
-	ft_julia_img(&data, fract);
+	ft_mandelbrot_img(&data, fract);
 
 
 	mlx_put_image_to_window(data.mlx, data.win, data.img, 1, 1);
