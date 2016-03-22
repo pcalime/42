@@ -6,7 +6,7 @@
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/19 14:36:39 by pcalime           #+#    #+#             */
-/*   Updated: 2016/03/22 13:16:51 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/03/22 13:48:24 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,23 @@ typedef struct	s_data
 
 typedef struct	s_fract
 {
-	
-}				t_fract
+	double		x1;
+	double		x2;
+	double		y1;
+	double		y2;
+	double		zoom_x;
+	double		zoom_y;
+	double		image_x;
+	double		image_y;
+	double		imax;
+	double		c_r;
+	double		c_i;
+	double		z_r;
+	double		z_i;
+	double		tmp_r;
+	double		tmp_i;
+	int			i;
+}				t_fract;
 
 void			ft_julia();
 int				ft_exit_win(int keycode, void *param);
