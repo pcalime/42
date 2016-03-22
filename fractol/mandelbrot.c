@@ -6,7 +6,7 @@
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 15:03:24 by pcalime           #+#    #+#             */
-/*   Updated: 2016/03/22 15:04:30 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/03/22 15:27:10 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ static t_fract	ft_init_mandelbrot(void)
 	ret.x2 = 0.6;
 	ret.y1 = -1.2;
 	ret.y2 = 1.2;
-	ret.image_x = 800;
-	ret.image_y = 800;
+	ret.image_x = 1080;
+	ret.image_y = 1080;
 	ret.zoom_x = ret.image_x / (ret.x2 - ret.x1);
 	ret.zoom_y = ret.image_y / (ret.y2 - ret.y1);
 	ret.imax = 30;
