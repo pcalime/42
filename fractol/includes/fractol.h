@@ -6,7 +6,7 @@
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/19 14:36:39 by pcalime           #+#    #+#             */
-/*   Updated: 2016/03/21 18:00:23 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/03/22 13:16:51 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,11 @@ typedef struct	s_data
 	int			line;
 	int			endian;
 }				t_data;
+
+typedef struct	s_fract
+{
+	
+}				t_fract
 
 void			ft_julia();
 int				ft_exit_win(int keycode, void *param);
