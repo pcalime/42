@@ -29,6 +29,7 @@ typedef struct	s_data
 	int			deca_nbit;
 	int			line;
 	int			endian;
+	int			fract;
 }				t_data;
 
 typedef struct	s_fract
@@ -56,5 +57,9 @@ void			ft_mandelbrot();
 int				ft_exit_win(int keycode, void *param);
 int				ft_mouse_ride(int x, int y, void *param);
 void			put_pixel_to_img(t_data *data, int x, int y, int color);
+void		ft_julia_img(t_data *data, t_fract ft);
+t_fract	ft_init_julia(void);
+t_fract	ft_init_mandelbrot(void);
+void		ft_mandelbrot_img(t_data *data, t_fract ft);
 
 #endif
