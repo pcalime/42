@@ -20,8 +20,8 @@ t_fract	ft_init_mandelbrot(void)
 	ret.x2 = 0.6;
 	ret.y1 = -1.2;
 	ret.y2 = 1.2;
-	ret.image_x = 800;
-	ret.image_y = 800;
+	ret.image_x = SIZE_WIN;
+	ret.image_y = SIZE_WIN;
 	ret.zoom_x = ret.image_x / (ret.x2 - ret.x1);
 	ret.zoom_y = ret.image_y / (ret.y2 - ret.y1);
 	ret.imax = 50;
@@ -58,10 +58,7 @@ void		ft_mandelbrot_img(t_data *data, t_fract ft)
 				ft.z_r = ft.z_r * ft.z_r - ft.z_i * ft.z_i + ft.c_r;
 				ft.z_i = 2 * ft.z_i * tmp + ft.c_i;
 			}
-			if (ft.i == ft.imax)
-				put_pixel_to_img(data, x, y, 0xff0000);
-			else
-				put_pixel_to_img(data, x, y, ft.i * 255 / ft.imax);
+			put_pixel_to_img(data, x, y, ft);
 		}
 	}
 }
@@ -73,15 +70,18 @@ void			ft_mandelbrot()
 
 	data = ft_memalloc(sizeof(t_data));
 	data->fract = 2;
+	data->pause = 0;
+	data->color = 0;
+	data->new_frt = ft_init_mandelbrot();
 	fract = ft_init_mandelbrot();
 	data->mlx = mlx_init();
-	data->win = mlx_new_window(data->mlx, 800, 800, "mandelbrot");
-	data->img = mlx_new_image(data->mlx, 800, 800);
+	data->win = mlx_new_window(data->mlx, SIZE_WIN, SIZE_WIN, "mandelbrot");
+	data->img = mlx_new_image(data->mlx, SIZE_WIN, SIZE_WIN);
 	data->img_data = mlx_get_data_addr(data->img, &data->nbit, &data->line, &data->endian);
 	data->deca_nbit = data->nbit >> 3;
 	ft_mandelbrot_img(data, fract);
 	mlx_put_image_to_window(data->mlx, data->win, data->img, 1, 1);
 	mlx_hook(data->win, 6, 0, ft_mouse_ride, data);
-	mlx_key_hook(data->win, ft_exit_win, 0);
+	mlx_key_hook(data->win, ft_key_press, data);
 	mlx_loop(data->mlx);
 }
