@@ -6,13 +6,13 @@
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/21 16:57:04 by pcalime           #+#    #+#             */
-/*   Updated: 2016/04/06 22:12:23 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/04/09 03:59:07 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-t_fract	ft_init_julia(void)
+t_fract		ft_init_julia(void)
 {
 	t_fract	ret;
 
@@ -63,7 +63,7 @@ void		ft_julia_img(t_data *data, t_fract ft)
 	}
 }
 
-void			ft_julia()
+void		ft_julia(void)
 {
 	t_data	*data;
 	t_fract	fract;
@@ -77,7 +77,8 @@ void			ft_julia()
 	data->mlx = mlx_init();
 	data->win = mlx_new_window(data->mlx, SIZE_WIN, SIZE_WIN, "julia");
 	data->img = mlx_new_image(data->mlx, SIZE_WIN, SIZE_WIN);
-	data->img_data = mlx_get_data_addr(data->img, &data->nbit, &data->line, &data->endian);
+	data->img_data = mlx_get_data_addr(data->img, &data->nbit, &data->line,
+			&data->endian);
 	data->deca_nbit = data->nbit >> 3;
 	ft_julia_img(data, fract);
 	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);

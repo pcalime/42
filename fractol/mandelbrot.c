@@ -6,13 +6,13 @@
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 15:03:24 by pcalime           #+#    #+#             */
-/*   Updated: 2016/04/06 22:12:25 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/04/09 03:58:56 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-t_fract	ft_init_mandelbrot(void)
+t_fract		ft_init_mandelbrot(void)
 {
 	t_fract	ret;
 
@@ -63,7 +63,7 @@ void		ft_mandelbrot_img(t_data *data, t_fract ft)
 	}
 }
 
-void			ft_mandelbrot()
+void		ft_mandelbrot(void)
 {
 	t_data	*data;
 	t_fract	fract;
@@ -77,7 +77,8 @@ void			ft_mandelbrot()
 	data->mlx = mlx_init();
 	data->win = mlx_new_window(data->mlx, SIZE_WIN, SIZE_WIN, "mandelbrot");
 	data->img = mlx_new_image(data->mlx, SIZE_WIN, SIZE_WIN);
-	data->img_data = mlx_get_data_addr(data->img, &data->nbit, &data->line, &data->endian);
+	data->img_data = mlx_get_data_addr(data->img, &data->nbit, &data->line,
+			&data->endian);
 	data->deca_nbit = data->nbit >> 3;
 	ft_mandelbrot_img(data, fract);
 	mlx_put_image_to_window(data->mlx, data->win, data->img, 1, 1);
