@@ -110,14 +110,14 @@ void		put_pixel_to_img(t_data *data, int x, int y, t_fract ft)
 	{
 		if (ft.i == ft.imax)
 		{
-			data->img_data[x * data->deca_nbit + (y * data->line)] = 60;
-			data->img_data[x * data->deca_nbit + (y * data->line) + 1] = 65;
-			data->img_data[x * data->deca_nbit + (y * data->line) + 2] = 50;
+			data->img_data[x * data->deca_nbit + (y * data->line)] = 168;
+			data->img_data[x * data->deca_nbit + (y * data->line) + 1] = 185;
+			data->img_data[x * data->deca_nbit + (y * data->line) + 2] = 2;
 		}
 		else
 		{
-			data->img_data[x * data->deca_nbit + (y * data->line)] = 52;
-			data->img_data[x * data->deca_nbit + (y * data->line) + 1] = 50;
+			data->img_data[x * data->deca_nbit + (y * data->line)] = 255;
+			data->img_data[x * data->deca_nbit + (y * data->line) + 1] = 127;
 			data->img_data[x * data->deca_nbit + (y * data->line) + 2] =
 				ft.i * 255 / ft.imax;
 		}

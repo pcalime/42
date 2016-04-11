@@ -12,19 +12,14 @@
 
 #include "fractol.h"
 
-void	ft_fractale3(void)
-{
-	ft_putstr("3");
-}
-
 int		ft_fractol(char *str)
 {
 	if (ft_strcmp(str, "mandelbrot") == 0)
 		ft_mandelbrot();
 	else if (ft_strcmp(str, "julia") == 0)
 		ft_julia();
-	else if (ft_strcmp(str, "fractale3") == 0)
-		ft_fractale3();
+	else if (ft_strcmp(str, "burningship") == 0)
+		ft_bns();
 	else
 	{
 		ft_putstr("Error : Wrong fractal name.\n");
@@ -45,6 +40,6 @@ int		main(int argc, char **argv)
 	else
 		ft_putstr("Error : Too much arguments.\n");
 	ft_putstr("Please select a fractal between those : mandelbrot , julia ");
-	ft_putstr(", fractale3 .\n");
+	ft_putstr(", burningship .\n");
 	return (0);
 }

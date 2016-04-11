@@ -6,7 +6,7 @@
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/21 16:57:04 by pcalime           #+#    #+#             */
-/*   Updated: 2016/04/09 03:59:07 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/04/11 22:17:28 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void		ft_julia(void)
 	ft_julia_img(data, fract);
 	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
 	mlx_hook(data->win, 6, 0, ft_mouse_ride, data);
+  mlx_hook(data->win, 4, 0, ft_mouse_scroll, data);
 	mlx_key_hook(data->win, ft_key_press, data);
 	mlx_loop(data->mlx);
 }

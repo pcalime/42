@@ -12,7 +12,8 @@
 
 NAME = fractol
 
-SRC = fractol.c julia.c mandelbrot.c mlx_fonction.c ft_put_pixel_to_img.c
+SRC = fractol.c julia.c mandelbrot.c mlx_fonction.c ft_put_pixel_to_img.c\
+			burningship.c
 
 OBJ = $(SRC:.c=.o)
 

@@ -83,6 +83,7 @@ void		ft_mandelbrot(void)
 	ft_mandelbrot_img(data, fract);
 	mlx_put_image_to_window(data->mlx, data->win, data->img, 1, 1);
 	mlx_hook(data->win, 6, 0, ft_mouse_ride, data);
+  mlx_hook(data->win, 4, 0, ft_mouse_scroll, data);
 	mlx_key_hook(data->win, ft_key_press, data);
 	mlx_loop(data->mlx);
 }
