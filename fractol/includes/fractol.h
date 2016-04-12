@@ -6,20 +6,19 @@
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/19 14:36:39 by pcalime           #+#    #+#             */
-/*   Updated: 2016/03/22 15:12:47 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/04/12 01:09:35 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
-# define SIZE_WIN 800
+# define SIZE_WIN 600
 # include <mlx.h>
 # include "libft.h"
 # include "get_next_line.h"
 # include <stdlib.h>
 # include <stdio.h>
-
 
 typedef struct	s_fract
 {
@@ -41,8 +40,6 @@ typedef struct	s_fract
 	int			i;
 }				t_fract;
 
-
-
 typedef struct	s_data
 {
 	void		*mlx;
@@ -56,22 +53,23 @@ typedef struct	s_data
 	int			fract;
 	int			pause;
 	int			color;
-	t_fract	new_frt;
+	t_fract		new_frt;
 }				t_data;
 
-void			ft_julia();
-void			ft_mandelbrot();
-void ft_bns(void);
+void			ft_julia(void);
+void			ft_mandelbrot(void);
+void			ft_bns(void);
 int				ft_key_press(int keycode, void *param);
 int				ft_mouse_ride(int x, int y, void *param);
+int				ft_mouse_scroll(int keycode, int x, int y, void *param);
+void			new_image(t_data *data, t_fract new_frt);
 void			put_pixel_to_img(t_data *data, int x, int y, t_fract ft);
-void		ft_julia_img(t_data *data, t_fract ft);
-t_fract	ft_init_julia(void);
-t_fract	ft_init_mandelbrot(void);
-t_fract   ft_init_bns(void);
-void		ft_mandelbrot_img(t_data *data, t_fract ft);
-void ft_bns_img(t_data *data, t_fract ft);
-void new_image(t_data *data, t_fract new_frt);
-int		ft_mouse_scroll(int keycode, int x, int y, void *param);
+t_fract			ft_init_julia(void);
+t_fract			ft_init_mandelbrot(void);
+t_fract			ft_init_bns(void);
+void			ft_julia_img(t_data *data, t_fract ft);
+void			ft_mandelbrot_img(t_data *data, t_fract ft);
+void			ft_bns_img(t_data *data, t_fract ft);
+void			check_bug(t_data *data);
 
 #endif

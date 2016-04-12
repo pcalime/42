@@ -6,7 +6,7 @@
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 15:03:24 by pcalime           #+#    #+#             */
-/*   Updated: 2016/04/09 03:58:56 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/04/11 23:19:35 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void		ft_mandelbrot(void)
 	ft_mandelbrot_img(data, fract);
 	mlx_put_image_to_window(data->mlx, data->win, data->img, 1, 1);
 	mlx_hook(data->win, 6, 0, ft_mouse_ride, data);
-  mlx_hook(data->win, 4, 0, ft_mouse_scroll, data);
+	mlx_hook(data->win, 4, 0, ft_mouse_scroll, data);
 	mlx_key_hook(data->win, ft_key_press, data);
 	mlx_loop(data->mlx);
 }

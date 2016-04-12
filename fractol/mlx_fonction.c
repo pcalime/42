@@ -6,22 +6,39 @@
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/21 17:39:09 by pcalime           #+#    #+#             */
-/*   Updated: 2016/04/09 03:55:59 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/04/12 01:19:24 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int		ft_key_press(int keycode, void *param)
+int			ft_key_press(int keycode, void *param)
 {
 	t_data *data;
 
 	data = param;
+	/*
+	printf("%d\n", keycode);
+	if (keycode == 126)
+	if (keycode == 123)
+	if (keycode == 125)
+	if (keycode == 124)
+	*/
 	if (keycode == 53)
 		exit(0);
 	if (keycode == 49)
 		data->pause = data->pause == 0 ? 1 : 0;
-	printf("data pause = %d\n", data->pause);
+	if (keycode == 15)
+	{
+		if (data->fract == 1)
+			data->new_frt = ft_init_julia();
+		if (data->fract == 2)
+			data->new_frt = ft_init_mandelbrot();
+		if (data->fract == 3)
+			data->new_frt = ft_init_bns();
+		data->pause = 0;
+		new_image(data, data->new_frt);
+	}
 	if (keycode <= 92 && keycode >= 82)
 	{
 		data->color = keycode - 82;
@@ -31,7 +48,7 @@ int		ft_key_press(int keycode, void *param)
 	return (0);
 }
 
-void	new_image(t_data *data, t_fract new_frt)
+void		new_image(t_data *data, t_fract new_frt)
 {
 	mlx_destroy_image(data->mlx, data->img);
 	data->img = mlx_new_image(data->mlx, SIZE_WIN, SIZE_WIN);
@@ -43,10 +60,11 @@ void	new_image(t_data *data, t_fract new_frt)
 		ft_mandelbrot_img(data, new_frt);
 	else if (data->fract == 3)
 		ft_bns_img(data, new_frt);
+	check_bug(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
 }
 
-int		ft_mouse_ride(int x, int y, void *param)
+int			ft_mouse_ride(int x, int y, void *param)
 {
 	t_data	*data;
 
@@ -62,12 +80,11 @@ int		ft_mouse_ride(int x, int y, void *param)
 			data->color++;
 		else if (data->color == 9)
 			data->color = 0;
-		printf("x = %d ; y = %d\n", x, y);
 	}
 	return (0);
 }
 
-static void ft_zoom(int keycode, t_data *data)
+static void	ft_zoom(int keycode, t_data *data)
 {
 	if (keycode == 4)
 	{
@@ -83,7 +100,7 @@ static void ft_zoom(int keycode, t_data *data)
 	}
 }
 
-int		ft_mouse_scroll(int keycode, int x, int y, void *param)
+int			ft_mouse_scroll(int keycode, int x, int y, void *param)
 {
 	t_data	*data;
 	double	z_x;
