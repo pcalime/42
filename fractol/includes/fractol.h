@@ -71,5 +71,6 @@ void			ft_julia_img(t_data *data, t_fract ft);
 void			ft_mandelbrot_img(t_data *data, t_fract ft);
 void			ft_bns_img(t_data *data, t_fract ft);
 void			check_bug(t_data *data);
+void			ft_change_frt(t_data *data, int keycode);
 
 #endif

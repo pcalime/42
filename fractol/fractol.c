@@ -6,11 +6,33 @@
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/19 14:58:12 by pcalime           #+#    #+#             */
-/*   Updated: 2016/04/06 22:05:48 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/04/12 23:06:10 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+void	ft_change_frt(t_data *data, int keycode)
+{
+	if (keycode == 38 && data->fract != 1)
+	{
+		data->fract = 1;
+		data->new_frt = ft_init_julia();
+		new_image(data, data->new_frt);
+	}
+	if (keycode == 46 && data->fract != 2)
+	{
+		data->fract = 2;
+		data->new_frt = ft_init_mandelbrot();
+		new_image(data, data->new_frt);
+	}
+	if (keycode == 11 && data->fract != 3)
+	{
+		data->fract = 3;
+		data->new_frt = ft_init_bns();
+		new_image(data, data->new_frt);
+	}
+}
 
 int		ft_fractol(char *str)
 {

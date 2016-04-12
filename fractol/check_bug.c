@@ -18,8 +18,6 @@ static int	check_red(t_data *data)
 	int		check;
 
 	check = -5;
-	if (data->fract == 3)
-		check = -6;
 	ret = 0;
 	if (data->img_data[0 * data->deca_nbit + (0 * data->line)] == check)
 		ret++;
@@ -40,8 +38,6 @@ static int	check_green(t_data *data)
 	int		check;
 
 	check = -5;
-	if (data->fract == 3)
-		check = -6;
 	ret = 0;
 	if (data->img_data[0 * data->deca_nbit + (0 * data->line) + 1] == check)
 		ret++;
@@ -62,8 +58,6 @@ static int	check_blue(t_data *data)
 	int		check;
 
 	check = -5;
-	if (data->fract == 3)
-		check = -6;
 	ret = 0;
 	if (data->img_data[0 * data->deca_nbit + (0 * data->line) + 2] == check)
 		ret++;

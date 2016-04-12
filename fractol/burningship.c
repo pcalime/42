@@ -31,14 +31,14 @@ t_fract			ft_init_bns(void)
 	ret.image_y = SIZE_WIN;
 	ret.zoom_x = ret.image_x / (ret.x2 - ret.x1);
 	ret.zoom_y = ret.image_y / (ret.y2 - ret.y1);
-	ret.imax = 42;
+	ret.imax = 50;
 	ret.c_r = 0;
 	ret.c_i = 0;
 	ret.z_r = 0;
 	ret.z_i = 0;
 	ret.tmp_r = 0;
 	ret.tmp_i = 0;
-	ret.i = 10;
+	ret.i = 0;
 	return (ret);
 }
 

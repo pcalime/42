@@ -17,13 +17,7 @@ int			ft_key_press(int keycode, void *param)
 	t_data *data;
 
 	data = param;
-	/*
-	printf("%d\n", keycode);
-	if (keycode == 126)
-	if (keycode == 123)
-	if (keycode == 125)
-	if (keycode == 124)
-	*/
+	ft_change_frt(data, keycode);
 	if (keycode == 53)
 		exit(0);
 	if (keycode == 49)
@@ -42,7 +36,6 @@ int			ft_key_press(int keycode, void *param)
 	if (keycode <= 92 && keycode >= 82)
 	{
 		data->color = keycode - 82;
-		printf("%d", data->color);
 		new_image(data, data->new_frt);
 	}
 	return (0);
@@ -71,15 +64,15 @@ int			ft_mouse_ride(int x, int y, void *param)
 	data = param;
 	if (data->pause == 0)
 	{
-		data->new_frt.tmp_r = (double)(x - (SIZE_WIN / 2)) / (SIZE_WIN / 2);
-		data->new_frt.tmp_i = (double)(y - (SIZE_WIN / 2)) / (SIZE_WIN / 2);
-		new_image(data, data->new_frt);
 		if (data->color <= 8)
 			data->color++;
 		if (data->color == 8)
 			data->color++;
 		else if (data->color == 9)
 			data->color = 0;
+		data->new_frt.tmp_r = (double)(x - (SIZE_WIN / 2)) / (SIZE_WIN / 2);
+		data->new_frt.tmp_i = (double)(y - (SIZE_WIN / 2)) / (SIZE_WIN / 2);
+		new_image(data, data->new_frt);
 	}
 	return (0);
 }
