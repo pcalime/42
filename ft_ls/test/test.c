@@ -72,9 +72,18 @@ void 	sort_list(t_list *begin_list)
 {
 	int		cmpt;
 	char	**stoke;
+	t_list	*tmp;
 
 	cmpt = list_len(begin_list);
 	stoke = malloc(sizeof(char *) * cmpt);
+	tmp = begin_list;
+	while (tmp != NULL)
+	{
+		cmpt--;
+		stoke[cmpt] = tmp->name;
+		tmp = tmp->next;
+	}
+	//trier stoke et rmplir une new_list
 }
 
 int		main (int argc, char **argv)
@@ -102,7 +111,7 @@ int		main (int argc, char **argv)
 		tmp = tmp->next;
 	}
 	sort_list(begin_list);
-	ft_putnbr(list_len(begin_list));
+//	ft_putnbr(list_len(begin_list));
 	while (begin_list->next != NULL)
 	{
 		a = strlen(begin_list->name);
@@ -111,7 +120,7 @@ int		main (int argc, char **argv)
 		begin_list = begin_list->next;
 	}
 	begin_list = create_new_list(4);
-	ft_putnbr(list_len(begin_list));
+//	ft_putnbr(list_len(begin_list));
 	closedir(test);
 	return (0);
 }
