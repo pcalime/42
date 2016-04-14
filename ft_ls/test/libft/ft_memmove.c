@@ -1,39 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_convert_int_to_bit.c                            :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/21 20:05:00 by pcalime           #+#    #+#             */
-/*   Updated: 2016/04/14 05:16:21 by pcalime          ###   ########.fr       */
+/*   Created: 2015/11/30 18:35:13 by pcalime           #+#    #+#             */
+/*   Updated: 2015/11/30 20:01:16 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*convert_int_to_bit(int nbr)
+void		*ft_memmove(void *dst, const void *src, size_t len)
 {
-	int		cmpt;
-	int		cmpt2;
-	char	tmp[32];
-	char	*ret;
+	size_t	index;
+	char	*dst_cpy;
+	char	*src_cpy;
 
-	ret = (char *)ft_memalloc(sizeof(char) * 33);
-	if (nbr < 0)
-		return (ft_strdup("0"));
-	cmpt = 0;
-	while (cmpt < 32)
+	dst_cpy = (char *)dst;
+	src_cpy = (char *)src;
+	index = 0;
+	if (src_cpy < dst_cpy)
 	{
-		tmp[cmpt] = nbr % 2 + 48;
-		nbr /= 2;
-		cmpt++;
+		while (index < len)
+		{
+			index++;
+			dst_cpy[len - index] = src_cpy[len - index];
+		}
 	}
-	cmpt2 = -1;
-	while (++cmpt2 < 32)
+	else
 	{
-		cmpt--;
-		ret[cmpt2] = tmp[cmpt];
+		while (index < len)
+		{
+			dst_cpy[index] = src_cpy[index];
+			index++;
+		}
 	}
-	return (ret);
+	return (dst);
 }

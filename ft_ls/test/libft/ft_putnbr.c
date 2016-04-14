@@ -1,39 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_convert_int_to_bit.c                            :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/21 20:05:00 by pcalime           #+#    #+#             */
-/*   Updated: 2016/04/14 05:16:21 by pcalime          ###   ########.fr       */
+/*   Created: 2015/11/26 19:06:08 by pcalime           #+#    #+#             */
+/*   Updated: 2015/11/28 17:52:46 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*convert_int_to_bit(int nbr)
+void	ft_putnbr(int n)
 {
-	int		cmpt;
-	int		cmpt2;
-	char	tmp[32];
-	char	*ret;
-
-	ret = (char *)ft_memalloc(sizeof(char) * 33);
-	if (nbr < 0)
-		return (ft_strdup("0"));
-	cmpt = 0;
-	while (cmpt < 32)
+	if (n == (-2147483648))
 	{
-		tmp[cmpt] = nbr % 2 + 48;
-		nbr /= 2;
-		cmpt++;
+		ft_putstr("-2");
+		n = 147483648;
 	}
-	cmpt2 = -1;
-	while (++cmpt2 < 32)
+	if (n < 0)
 	{
-		cmpt--;
-		ret[cmpt2] = tmp[cmpt];
+		ft_putchar('-');
+		n *= -1;
 	}
-	return (ret);
+	if (n >= 10)
+	{
+		ft_putnbr(n / 10);
+		ft_putnbr(n % 10);
+	}
+	else
+		ft_putchar(n + 48);
 }

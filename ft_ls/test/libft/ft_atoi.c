@@ -1,39 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_convert_int_to_bit.c                            :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/21 20:05:00 by pcalime           #+#    #+#             */
-/*   Updated: 2016/04/14 05:16:21 by pcalime          ###   ########.fr       */
+/*   Created: 2015/11/26 14:56:32 by pcalime           #+#    #+#             */
+/*   Updated: 2016/03/21 20:09:17 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*convert_int_to_bit(int nbr)
+int		ft_atoi(const char *str)
 {
-	int		cmpt;
-	int		cmpt2;
-	char	tmp[32];
-	char	*ret;
+	int cmpt;
+	int number;
+	int negative;
 
-	ret = (char *)ft_memalloc(sizeof(char) * 33);
-	if (nbr < 0)
-		return (ft_strdup("0"));
+	number = 0;
 	cmpt = 0;
-	while (cmpt < 32)
+	negative = 1;
+	while (ft_isspace(str[cmpt]))
+		cmpt++;
+	if (str[cmpt] == '-')
 	{
-		tmp[cmpt] = nbr % 2 + 48;
-		nbr /= 2;
+		negative = -1;
+	}
+	if (str[cmpt] == '+' || str[cmpt] == '-')
+		cmpt++;
+	while (str[cmpt] >= '0' && str[cmpt] <= '9')
+	{
+		number *= 10;
+		number += str[cmpt] - 48;
 		cmpt++;
 	}
-	cmpt2 = -1;
-	while (++cmpt2 < 32)
-	{
-		cmpt--;
-		ret[cmpt2] = tmp[cmpt];
-	}
-	return (ret);
+	return (number *= negative);
 }

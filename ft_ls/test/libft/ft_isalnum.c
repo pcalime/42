@@ -1,39 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_convert_int_to_bit.c                            :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/21 20:05:00 by pcalime           #+#    #+#             */
-/*   Updated: 2016/04/14 05:16:21 by pcalime          ###   ########.fr       */
+/*   Created: 2015/11/27 16:41:46 by pcalime           #+#    #+#             */
+/*   Updated: 2015/12/03 13:27:35 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*convert_int_to_bit(int nbr)
+int		ft_isalnum(int c)
 {
-	int		cmpt;
-	int		cmpt2;
-	char	tmp[32];
-	char	*ret;
-
-	ret = (char *)ft_memalloc(sizeof(char) * 33);
-	if (nbr < 0)
-		return (ft_strdup("0"));
-	cmpt = 0;
-	while (cmpt < 32)
-	{
-		tmp[cmpt] = nbr % 2 + 48;
-		nbr /= 2;
-		cmpt++;
-	}
-	cmpt2 = -1;
-	while (++cmpt2 < 32)
-	{
-		cmpt--;
-		ret[cmpt2] = tmp[cmpt];
-	}
-	return (ret);
+	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
+		return (1);
+	if (c >= '0' && c <= '9')
+		return (1);
+	else
+		return (0);
 }

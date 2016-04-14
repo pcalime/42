@@ -1,39 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_convert_int_to_bit.c                            :+:      :+:    :+:   */
+/*   ft_memalloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/21 20:05:00 by pcalime           #+#    #+#             */
-/*   Updated: 2016/04/14 05:16:21 by pcalime          ###   ########.fr       */
+/*   Created: 2015/11/30 18:59:18 by pcalime           #+#    #+#             */
+/*   Updated: 2015/11/30 18:59:46 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*convert_int_to_bit(int nbr)
+void		*ft_memalloc(size_t size)
 {
-	int		cmpt;
-	int		cmpt2;
-	char	tmp[32];
-	char	*ret;
+	char *str;
 
-	ret = (char *)ft_memalloc(sizeof(char) * 33);
-	if (nbr < 0)
-		return (ft_strdup("0"));
-	cmpt = 0;
-	while (cmpt < 32)
-	{
-		tmp[cmpt] = nbr % 2 + 48;
-		nbr /= 2;
-		cmpt++;
-	}
-	cmpt2 = -1;
-	while (++cmpt2 < 32)
-	{
-		cmpt--;
-		ret[cmpt2] = tmp[cmpt];
-	}
-	return (ret);
+	str = (char*)malloc(sizeof(char) * size);
+	if (size == 0)
+		return (NULL);
+	if (!str)
+		return (NULL);
+	ft_bzero(str, size);
+	return ((void*)str);
 }

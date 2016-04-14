@@ -1,39 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_convert_int_to_bit.c                            :+:      :+:    :+:   */
+/*   convert_bit_to_char.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/21 20:05:00 by pcalime           #+#    #+#             */
-/*   Updated: 2016/04/14 05:16:21 by pcalime          ###   ########.fr       */
+/*   Created: 2016/03/21 20:54:53 by pcalime           #+#    #+#             */
+/*   Updated: 2016/03/21 20:57:53 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*convert_int_to_bit(int nbr)
+int		convert_bit_to_char(char *str)
 {
-	int		cmpt;
-	int		cmpt2;
-	char	tmp[32];
-	char	*ret;
+	int	ret;
 
-	ret = (char *)ft_memalloc(sizeof(char) * 33);
-	if (nbr < 0)
-		return (ft_strdup("0"));
-	cmpt = 0;
-	while (cmpt < 32)
-	{
-		tmp[cmpt] = nbr % 2 + 48;
-		nbr /= 2;
-		cmpt++;
-	}
-	cmpt2 = -1;
-	while (++cmpt2 < 32)
-	{
-		cmpt--;
-		ret[cmpt2] = tmp[cmpt];
-	}
+	ret = 0;
+	ret += (str[0] - 48) * 128;
+	ret += (str[1] - 48) * 64;
+	ret += (str[2] - 48) * 32;
+	ret += (str[3] - 48) * 16;
+	ret += (str[4] - 48) * 8;
+	ret += (str[5] - 48) * 4;
+	ret += (str[6] - 48) * 2;
+	ret += (str[7] - 48);
 	return (ret);
 }

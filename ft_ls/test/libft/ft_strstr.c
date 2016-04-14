@@ -1,39 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_convert_int_to_bit.c                            :+:      :+:    :+:   */
+/*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/21 20:05:00 by pcalime           #+#    #+#             */
-/*   Updated: 2016/04/14 05:16:21 by pcalime          ###   ########.fr       */
+/*   Created: 2015/11/27 17:39:25 by pcalime           #+#    #+#             */
+/*   Updated: 2015/11/30 20:02:33 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*convert_int_to_bit(int nbr)
+char	*ft_strstr(const char *s1, const char *s2)
 {
-	int		cmpt;
+	int		cmpt1;
 	int		cmpt2;
-	char	tmp[32];
-	char	*ret;
 
-	ret = (char *)ft_memalloc(sizeof(char) * 33);
-	if (nbr < 0)
-		return (ft_strdup("0"));
-	cmpt = 0;
-	while (cmpt < 32)
+	cmpt1 = 0;
+	cmpt2 = 0;
+	if (!*s2)
+		return ((char*)s1);
+	while (s1[cmpt1])
 	{
-		tmp[cmpt] = nbr % 2 + 48;
-		nbr /= 2;
-		cmpt++;
+		while (s1[cmpt1 + cmpt2] && s1[cmpt1 + cmpt2] == s2[cmpt2])
+			cmpt2++;
+		if (!s2[cmpt2])
+			return ((char *)s1 + cmpt1);
+		else
+			cmpt2 = 0;
+		cmpt1++;
 	}
-	cmpt2 = -1;
-	while (++cmpt2 < 32)
-	{
-		cmpt--;
-		ret[cmpt2] = tmp[cmpt];
-	}
-	return (ret);
+	return (0);
 }
