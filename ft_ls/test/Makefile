@@ -12,7 +12,7 @@
 
 NAME = ft_ls
 
-SRC = test.c
+SRC = test2.c
 
 OBJ = $(SRC:.c=.o)
 
