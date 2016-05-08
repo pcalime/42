@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pcalime <marvin@42.fr>                     +#+  +:+       +#+         #
+#    By: pcalime <pcalime@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/04/14 01:24:42 by pcalime           #+#    #+#              #
-#    Updated: 2016/04/14 01:24:45 by pcalime          ###   ########.fr        #
+#    Updated: 2016/05/08 05:38:37 by pcalime          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ft_ls
 
-SRC = test2.c
+SRC = test2.c sort_list.c parsing.c
 
 OBJ = $(SRC:.c=.o)
 

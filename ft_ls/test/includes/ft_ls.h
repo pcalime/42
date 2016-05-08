@@ -6,7 +6,7 @@
 /*   By: pcalime <pcalime@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 23:42:19 by pcalime           #+#    #+#             */
-/*   Updated: 2016/05/06 04:33:16 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/05/08 05:38:36 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef struct		s_list
 {
 	char			*name;
 	struct s_list	*next;
-	struct stat		*file_stat;
+	struct stat		file_stat;
 }					t_list;
 
 typedef struct		s_opts
@@ -48,7 +48,9 @@ typedef struct		s_opts
 	int				R;
 }					t_opts;
 
-void	sort_list(t_list **begin_list, struct dirent *str_dir);
+t_opts	*init_options();
+void	ft_parse_opt(char *str, t_opts *options);
+t_print	sort_list(t_list **begin_list, struct dirent *str_dir, char *previous);
 t_list	*create_new_elem(void);
 
 #endif
