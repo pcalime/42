@@ -6,7 +6,7 @@
 /*   By: pcalime <pcalime@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 23:42:19 by pcalime           #+#    #+#             */
-/*   Updated: 2016/05/08 05:38:36 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/05/11 03:48:34 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,8 @@ t_opts	*init_options();
 void	ft_parse_opt(char *str, t_opts *options);
 t_print	sort_list(t_list **begin_list, struct dirent *str_dir, char *previous);
 t_list	*create_new_elem(void);
+int		size_of_int(int nbr);
+void	reverse_list(t_list **begin_list);
+void	sort_time(t_list **begin_list);
 
 #endif

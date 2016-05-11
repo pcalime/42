@@ -6,13 +6,13 @@
 #    By: pcalime <pcalime@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/04/14 01:24:42 by pcalime           #+#    #+#              #
-#    Updated: 2016/05/08 05:38:37 by pcalime          ###   ########.fr        #
+#    Updated: 2016/05/11 03:46:59 by pcalime          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ft_ls
 
-SRC = test2.c sort_list.c parsing.c
+SRC = test2.c sort_list.c parsing.c sort_list2.c
 
 OBJ = $(SRC:.c=.o)
 

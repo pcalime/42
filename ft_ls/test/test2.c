@@ -6,7 +6,7 @@
 /*   By: pcalime <pcalime@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 22:47:15 by pcalime           #+#    #+#             */
-/*   Updated: 2016/05/08 05:38:33 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/05/11 06:12:27 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	ft_putnstr(char *str, int n)
 {
 	int		cmpt;
 
-	if(n > 0)
+	if (n > 0)
 	{
 		cmpt = ft_strlen(str);
 		while (++cmpt < n)
@@ -67,19 +67,12 @@ void	ft_putnstr(char *str, int n)
 
 void	ft_putnnbr(int nbr, int n)
 {
-	int		cmpt;
 	int		tmp;
 
 	if (n > 0)
 	{
-		cmpt = 0;
-		tmp = nbr;
-		while (tmp > 10)
-		{
-			cmpt++;
-			tmp /= 10;
-		}
-		while (++cmpt < n)
+		tmp = size_of_int(nbr);
+		while (--n >= tmp)
 			ft_putchar(' ');
 	}
 	else
@@ -106,21 +99,23 @@ void	cut_time(time_t time_f)
 		ft_strcat(aff, &aff[18]);
 		aff[16] = '\0';
 	}
-	ft_putnstr(&aff[4], -1);
+	ft_putchar(' ');
+	ft_putstr(&aff[4]);
 }
 
 void	affiche_l(struct stat file_stat, char *name, t_print size_print)
 {
-	printf("\n%d\n%d\n%d\n%d\n", size_print.links, size_print.user, size_print.groupe, size_print.size);
 	ft_affiche_modes(file_stat);
-	ft_putnnbr(file_stat.st_nlink, (size_print.links + 4));
+	ft_putnnbr(file_stat.st_nlink, (size_print.links + 1));
+	ft_putchar(' ');
 	if (getpwuid(file_stat.st_uid)->pw_name != NULL)
-		ft_putnstr(getpwuid(file_stat.st_uid)->pw_name, -size_print.user - 2);
+		ft_putnstr(getpwuid(file_stat.st_uid)->pw_name, -size_print.user - 3);
 	if (getgrgid(file_stat.st_gid)->gr_name != NULL)
 		ft_putnstr(getgrgid(file_stat.st_gid)->gr_name, -size_print.groupe - 1);
 	ft_putnnbr(file_stat.st_size, size_print.size + 1);
 	cut_time(file_stat.st_mtime);
-	ft_putnstr(name, -1);
+	ft_putchar(' ');
+	ft_putnstr(name, -2);
 	ft_putchar('\n');
 }
 
@@ -136,6 +131,29 @@ void	max_t_print(t_print *max, t_print new)
 		max->size = new.size;
 }
 
+void	init_t_print(t_print *ini)
+{
+	ini->links = 0;
+	ini->user = 0;
+	ini->groupe = 0;
+	ini->size = 0;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+								//A FAIRE !!!
+/* 	faire les modes
+	-R
+	le parsing
+	
+*/////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
 int		main(int argc, char **argv)
 {
 	t_opts	*options;
@@ -144,9 +162,11 @@ int		main(int argc, char **argv)
 	struct dirent	*str_dir;
 	t_print	siz_prt;
 
+	init_t_print(&siz_prt);
 	options = init_options();
 	if (argc == 3)
 	{
+		ft_parse_opt(argv[1], options);
 		if ((directory = opendir(argv[2])) == NULL)
 		{
 			perror("error ");
@@ -154,30 +174,27 @@ int		main(int argc, char **argv)
 		}
 		while ((str_dir = readdir(directory)) != NULL)
 		{
-			max_t_print(&siz_prt, sort_list(&begin_list, str_dir, argv[2]));
+			if (options->a == 0 && str_dir->d_name[0] == '.')
+				argc = 3;
+			else
+				max_t_print(&siz_prt, sort_list(&begin_list, str_dir, argv[2]));
+		//	printf("max  : %d\n", siz_prt.links);
 		}
-		printf("\n%d\n%d\n%d\n%d\n", siz_prt.links, siz_prt.user, siz_prt.groupe, siz_prt.size);
-		return(0);
-		ft_parse_opt(argv[1], options);
-//		if (options->t == 1)
-//			sort_list_t;
-//		if (options->r == 1)
-//			reverse_list;
+		//printf("%d %d %d %d\n", siz_prt.links, siz_prt.user, siz_prt.groupe, siz_prt.size);
+		if (options->t == 1)
+			sort_time(&begin_list);
+		if (options->r == 1)
+			reverse_list(&begin_list);
 		while (begin_list != NULL)
 		{
-			if (options->a == 0 && begin_list->name[0] == '.')
-				begin_list = begin_list->next;
+			if (options->l == 1)
+				affiche_l(begin_list->file_stat, begin_list->name, siz_prt);
 			else
 			{
-				if (options->l == 1)
-					affiche_l(begin_list->file_stat, begin_list->name, siz_prt);
-				else
-				{
-					ft_putstr(begin_list->name);
-					write(1, "\n", 1);
-				}
-				begin_list = begin_list->next;
+				ft_putstr(begin_list->name);
+				write(1, "\n", 1);
 			}
+			begin_list = begin_list->next;
 		}
 	}
 	return (0);

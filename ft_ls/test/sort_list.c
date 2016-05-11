@@ -6,23 +6,32 @@
 /*   By: pcalime <pcalime@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/06 03:19:16 by pcalime           #+#    #+#             */
-/*   Updated: 2016/05/08 05:38:34 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/05/11 00:54:32 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-static int		size_of_int(int nbr)
+int		size_of_int(int nbr)
 {
-	int		ret;
-
-	ret = 0;
-	while (nbr > 10)
-	{
-		nbr /=10;
-		ret++;
-	}
-	return (ret);
+	if (nbr < 10)
+		return (1);
+	else if (nbr < 100)
+		return (2);
+	else if (nbr < 1000)
+		return (3);
+	else if (nbr < 10000)
+		return (4);
+	else if (nbr < 100000)
+		return (5);
+	else if (nbr < 1000000)
+		return (6);
+	else if (nbr < 10000000)
+		return (7);
+	else if (nbr < 100000000)
+		return (8);
+	else
+		return (9);
 }
 
 static char		*ft_join(char *str1, char *str2)
@@ -49,13 +58,15 @@ static t_print	fill_print(struct stat file_stat)
 {
 	t_print	ret;
 
+//	printf("stat : %d | ", file_stat.st_nlink);
+
 	if (file_stat.st_nlink)
 		ret.links = size_of_int((int)file_stat.st_nlink);
-	if (ft_strlen(getpwuid(file_stat.st_uid)->pw_name) <= 0)
+//	printf("ret  : %d | ", ret.links);
+	if (ft_strlen(getpwuid(file_stat.st_uid)->pw_name))
 		ret.user = ft_strlen(getpwuid(file_stat.st_uid)->pw_name);
-	if (ret.user == 32767)
-		ret.user = 0;
-	ret.groupe = ft_strlen(getgrgid(file_stat.st_gid)->gr_name);
+	if (ft_strlen(getgrgid(file_stat.st_gid)->gr_name))
+		ret.groupe = ft_strlen(getgrgid(file_stat.st_gid)->gr_name);
 	ret.size = size_of_int(file_stat.st_size);
 	return (ret);
 }
