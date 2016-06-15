@@ -6,7 +6,7 @@
 /*   By: pcalime <pcalime@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 22:47:15 by pcalime           #+#    #+#             */
-/*   Updated: 2016/05/17 04:47:21 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/06/15 23:59:26 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,27 +21,43 @@ t_list			*create_new_elem(void)
 	return (new_elem);
 }
 
+static void	ft_kind_file(struct stat file_stat)
+{
+	if (S_ISDIR(file_stat.st_mode))
+		ft_putchar('d');
+	else if (S_ISLNK(file_stat.st_mode))
+		ft_putchar('l');
+	else
+		ft_putchar('-');
+}
+
 void	ft_affiche_modes(struct stat file_stat)
 {
-	ft_putchar((S_ISDIR(file_stat.st_mode)) ? 'd' : '-');
-	if (file_stat.st_mode & S_ISVTX)
-		ft_putstr("--------T");
-	else if (file_stat.st_mode & S_ISGID)
-		ft_putstr("-----S---");
-	else if (file_stat.st_mode & S_ISUID)
-		ft_putstr("--S------");
+	ft_kind_file(file_stat);
+	ft_putchar((file_stat.st_mode & S_IRUSR) ? 'r' : '-');
+	ft_putchar((file_stat.st_mode & S_IWUSR) ? 'w' : '-');
+	if ((file_stat.st_mode & S_ISVTX) && (file_stat.st_mode & S_IXUSR))
+		ft_putstr("s");
+	else if (file_stat.st_mode & S_ISVTX)
+		ft_putstr("S");
 	else
-	{
-		ft_putchar((file_stat.st_mode & S_IRUSR) ? 'r' : '-');
-		ft_putchar((file_stat.st_mode & S_IWUSR) ? 'w' : '-');
 		ft_putchar((file_stat.st_mode & S_IXUSR) ? 'x' : '-');
-		ft_putchar((file_stat.st_mode & S_IRGRP) ? 'r' : '-');
-		ft_putchar((file_stat.st_mode & S_IWGRP) ? 'w' : '-');
+	ft_putchar((file_stat.st_mode & S_IRGRP) ? 'r' : '-');
+	ft_putchar((file_stat.st_mode & S_IWGRP) ? 'w' : '-');
+	if ((file_stat.st_mode & S_ISGID) && (file_stat.st_mode & S_IXGRP))
+		ft_putstr("s");
+	else if (file_stat.st_mode & S_ISGID)
+		ft_putstr("S");
+	else
 		ft_putchar((file_stat.st_mode & S_IXGRP) ? 'x' : '-');
-		ft_putchar((file_stat.st_mode & S_IROTH) ? 'r' : '-');
-		ft_putchar((file_stat.st_mode & S_IWOTH) ? 'w' : '-');
+	ft_putchar((file_stat.st_mode & S_IROTH) ? 'r' : '-');
+	ft_putchar((file_stat.st_mode & S_IWOTH) ? 'w' : '-');
+	if ((file_stat.st_mode & S_ISUID) && (file_stat.st_mode & S_IXOTH))
+		ft_putstr("s");
+	else if (file_stat.st_mode & S_ISUID)
+		ft_putstr("S");
+	else
 		ft_putchar((file_stat.st_mode & S_IXOTH) ? 'x' : '-');
-	}
 }
 
 
@@ -116,6 +132,7 @@ void	affiche_l(struct stat file_stat, char *name, t_print size_print)
 	cut_time(file_stat.st_mtime);
 	ft_putchar(' ');
 	ft_putnstr(name, -2);
+	//si c est un  lien symbolique ecrire le lien;
 	ft_putchar('\n');
 }
 
@@ -150,10 +167,10 @@ void	affiche_total(t_print siz_prt)
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 								//A FAIRE !!!
-/* 	faire les modes
-	-R
-	le parsing
-	liens symboliques -l
+/* 	faire les modes (a peaufiner(is_dir, is_etc ..))
+	-R (faut le faire)!!!!!!
+	le parsing (ca a l aire plutot bon)
+	liens symboliques -l (affiche_l faut rajouter le lien)
 
 *//////////////////////////////////////////////////////////////////////////////////////////////////////
 
