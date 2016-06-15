@@ -6,7 +6,7 @@
 /*   By: pcalime <pcalime@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/06 03:19:16 by pcalime           #+#    #+#             */
-/*   Updated: 2016/05/11 00:54:32 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/05/17 07:22:12 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,20 +54,18 @@ static char		*ft_join(char *str1, char *str2)
 	return (ret);
 }
 
-static t_print	fill_print(struct stat file_stat)
+t_print	fill_print(struct stat file_stat)
 {
 	t_print	ret;
 
-//	printf("stat : %d | ", file_stat.st_nlink);
-
 	if (file_stat.st_nlink)
 		ret.links = size_of_int((int)file_stat.st_nlink);
-//	printf("ret  : %d | ", ret.links);
 	if (ft_strlen(getpwuid(file_stat.st_uid)->pw_name))
 		ret.user = ft_strlen(getpwuid(file_stat.st_uid)->pw_name);
 	if (ft_strlen(getgrgid(file_stat.st_gid)->gr_name))
 		ret.groupe = ft_strlen(getgrgid(file_stat.st_gid)->gr_name);
 	ret.size = size_of_int(file_stat.st_size);
+	ret.total = file_stat.st_blocks;
 	return (ret);
 }
 

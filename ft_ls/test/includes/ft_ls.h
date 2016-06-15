@@ -6,7 +6,7 @@
 /*   By: pcalime <pcalime@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 23:42:19 by pcalime           #+#    #+#             */
-/*   Updated: 2016/05/11 03:48:34 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/05/17 07:22:06 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ typedef struct		s_print
 	int				user;
 	int				groupe;
 	int				size;
+	int				link_space;
+	long long		total;
 }					t_print;
 
 typedef struct		s_list
@@ -48,6 +50,10 @@ typedef struct		s_opts
 	int				R;
 }					t_opts;
 
+void	init_t_print(t_print *ini);
+void	sort_arg(int argc, char **argv, int cmpt);
+void	ft_ls1();
+void	ft_ls2(int argc, char **argv);
 t_opts	*init_options();
 void	ft_parse_opt(char *str, t_opts *options);
 t_print	sort_list(t_list **begin_list, struct dirent *str_dir, char *previous);
@@ -55,5 +61,9 @@ t_list	*create_new_elem(void);
 int		size_of_int(int nbr);
 void	reverse_list(t_list **begin_list);
 void	sort_time(t_list **begin_list);
+void	affiche_l(struct stat file_stat, char *name, t_print size_print);
+void	affiche_total(t_print siz_prt);
+void	max_t_print(t_print *max, t_print new);
+t_print	fill_print(struct stat file_stat);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: pcalime <pcalime@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 22:47:15 by pcalime           #+#    #+#             */
-/*   Updated: 2016/05/11 06:12:27 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/05/17 04:47:21 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ void	max_t_print(t_print *max, t_print new)
 		max->groupe = new.groupe;
 	if (max->size < new.size)
 		max->size = new.size;
+	max->total += new.total;
 }
 
 void	init_t_print(t_print *ini)
@@ -137,23 +138,34 @@ void	init_t_print(t_print *ini)
 	ini->user = 0;
 	ini->groupe = 0;
 	ini->size = 0;
+	ini->link_space = 0;
+	ini->total = 0;
 }
 
-
+void	affiche_total(t_print siz_prt)
+{
+	ft_putstr("total ");
+	ft_putnbr(siz_prt.total);
+	ft_putchar('\n');
+}
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 								//A FAIRE !!!
 /* 	faire les modes
 	-R
 	le parsing
-	
-*/////////////////////////////////////////////////////////////////////////////////////////////////////////
+	liens symboliques -l
 
+*//////////////////////////////////////////////////////////////////////////////////////////////////////
 
+int		main(int argc, char **argv)
+{
+	if (argc == 1)
+		ft_ls1();
+	else
+		ft_ls2(argc, argv);
+}
 
-
-
-
-
+/*
 int		main(int argc, char **argv)
 {
 	t_opts	*options;
@@ -164,6 +176,8 @@ int		main(int argc, char **argv)
 
 	init_t_print(&siz_prt);
 	options = init_options();
+	if (argc == 1)
+		ft_ls1();
 	if (argc == 3)
 	{
 		ft_parse_opt(argv[1], options);
@@ -185,6 +199,8 @@ int		main(int argc, char **argv)
 			sort_time(&begin_list);
 		if (options->r == 1)
 			reverse_list(&begin_list);
+		if (options->l == 1 && begin_list != NULL)
+			affiche_total(siz_prt);
 		while (begin_list != NULL)
 		{
 			if (options->l == 1)
@@ -197,41 +213,5 @@ int		main(int argc, char **argv)
 			begin_list = begin_list->next;
 		}
 	}
-	return (0);
-}
-
-/*
-int		main(int argc, char **argv)
-{
-//	DIR				*directory;
-//	struct dirent	*str_dir;
-	t_list			*begin_list;
-	struct stat		file_stat;
-
-	if (argc != 2)
-		return (1);
-	begin_list = NULL;
-	if (lstat(argv[1], &file_stat) == -1)
-	{
-		perror ("error ");
-		return (0);
-	}
-	affiche_l(file_stat, argv[1]);
-	if ((directory = opendir(argv[1])) == NULL)
-	{
-		perror("error ");
-		return (0);
-	}
-	while ((str_dir = readdir(directory)) != NULL)
-	{
-		sort_list(&begin_list, str_dir);
-	}
-	while (begin_list != NULL)			//afficher le dossier.
-	{
-		ft_putstr(begin_list->name);
-		write(1, "\n", 1);
-		begin_list = begin_list->next;
-	}
-	closedir(directory);
 	return (0);
 }*/

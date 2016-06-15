@@ -6,11 +6,22 @@
 /*   By: pcalime <pcalime@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/11 02:20:42 by pcalime           #+#    #+#             */
-/*   Updated: 2016/05/11 06:05:23 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/05/17 06:01:36 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+
+void	sort_arg(int argc, char **argv, int cmpt) // a faire
+{
+	char	**ret;
+
+	while (cmpt < argc)
+	{
+		ret = argv;
+		cmpt++;
+	}
+}
 
 void	reverse_list(t_list **begin_list)
 {
