@@ -6,7 +6,7 @@
 /*   By: pcalime <pcalime@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/06 03:19:16 by pcalime           #+#    #+#             */
-/*   Updated: 2016/05/17 07:22:12 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/06/16 00:57:51 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,10 @@ int		size_of_int(int nbr)
 		return (7);
 	else if (nbr < 100000000)
 		return (8);
-	else
+	else if (nbr < 1000000000)
 		return (9);
+	else
+		return (10);
 }
 
 static char		*ft_join(char *str1, char *str2)

@@ -6,7 +6,7 @@
 /*   By: pcalime <pcalime@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 22:47:15 by pcalime           #+#    #+#             */
-/*   Updated: 2016/06/15 23:59:26 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/06/16 01:41:00 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ void	ft_affiche_modes(struct stat file_stat)
 	ft_kind_file(file_stat);
 	ft_putchar((file_stat.st_mode & S_IRUSR) ? 'r' : '-');
 	ft_putchar((file_stat.st_mode & S_IWUSR) ? 'w' : '-');
-	if ((file_stat.st_mode & S_ISVTX) && (file_stat.st_mode & S_IXUSR))
+	if ((file_stat.st_mode & S_ISUID) && (file_stat.st_mode & S_IXUSR))
 		ft_putstr("s");
-	else if (file_stat.st_mode & S_ISVTX)
+	else if (file_stat.st_mode & S_ISUID)
 		ft_putstr("S");
 	else
 		ft_putchar((file_stat.st_mode & S_IXUSR) ? 'x' : '-');
@@ -52,10 +52,10 @@ void	ft_affiche_modes(struct stat file_stat)
 		ft_putchar((file_stat.st_mode & S_IXGRP) ? 'x' : '-');
 	ft_putchar((file_stat.st_mode & S_IROTH) ? 'r' : '-');
 	ft_putchar((file_stat.st_mode & S_IWOTH) ? 'w' : '-');
-	if ((file_stat.st_mode & S_ISUID) && (file_stat.st_mode & S_IXOTH))
-		ft_putstr("s");
-	else if (file_stat.st_mode & S_ISUID)
-		ft_putstr("S");
+	if ((file_stat.st_mode & S_ISVTX) && (file_stat.st_mode & S_IXOTH))
+		ft_putstr("t");
+	else if (file_stat.st_mode & S_ISVTX)
+		ft_putstr("T");
 	else
 		ft_putchar((file_stat.st_mode & S_IXOTH) ? 'x' : '-');
 }
@@ -121,6 +121,10 @@ void	cut_time(time_t time_f)
 
 void	affiche_l(struct stat file_stat, char *name, t_print size_print)
 {
+	char	buf[1024];
+	ssize_t	nb;
+
+	ft_bzero(buf, sizeof(buf));
 	ft_affiche_modes(file_stat);
 	ft_putnnbr(file_stat.st_nlink, (size_print.links + 1));
 	ft_putchar(' ');
@@ -132,7 +136,13 @@ void	affiche_l(struct stat file_stat, char *name, t_print size_print)
 	cut_time(file_stat.st_mtime);
 	ft_putchar(' ');
 	ft_putnstr(name, -2);
-	//si c est un  lien symbolique ecrire le lien;
+	if (S_ISLNK(file_stat.st_mode))
+	{
+		ft_putstr(" -> ");
+		nb = readlink("/private/tmp/munki_swupd_cache", buf, 1023);
+		write(1, buf, ft_strlen(buf));
+		//si c est un  lien symbolique ecrire le lien;
+	}
 	ft_putchar('\n');
 }
 
@@ -170,7 +180,7 @@ void	affiche_total(t_print siz_prt)
 /* 	faire les modes (a peaufiner(is_dir, is_etc ..))
 	-R (faut le faire)!!!!!!
 	le parsing (ca a l aire plutot bon)
-	liens symboliques -l (affiche_l faut rajouter le lien)
+	liens symboliques -l (affiche_l faut rajouter le lien(trouver le path complet))
 
 *//////////////////////////////////////////////////////////////////////////////////////////////////////
 
