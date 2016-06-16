@@ -6,7 +6,7 @@
 /*   By: pcalime <pcalime@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 22:47:15 by pcalime           #+#    #+#             */
-/*   Updated: 2016/06/16 01:41:00 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/06/16 03:50:24 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,13 +118,16 @@ void	cut_time(time_t time_f)
 	ft_putchar(' ');
 	ft_putstr(&aff[4]);
 }
-
+#include <sys/types.h>
+#include <sys/xattr.h>
 void	affiche_l(struct stat file_stat, char *name, t_print size_print)
 {
-	char	buf[1024];
-	ssize_t	nb;
+	char	buf2[1024];
+	ssize_t nb2;
 
-	ft_bzero(buf, sizeof(buf));
+	ft_bzero(buf2, sizeof(buf2));
+
+
 	ft_affiche_modes(file_stat);
 	ft_putnnbr(file_stat.st_nlink, (size_print.links + 1));
 	ft_putchar(' ');
@@ -139,8 +142,8 @@ void	affiche_l(struct stat file_stat, char *name, t_print size_print)
 	if (S_ISLNK(file_stat.st_mode))
 	{
 		ft_putstr(" -> ");
-		nb = readlink("/private/tmp/munki_swupd_cache", buf, 1023);
-		write(1, buf, ft_strlen(buf));
+		nb2 = readlink("/private/tmp/munki_swupd_cache", buf2, 1023);
+		write(1, buf2, ft_strlen(buf2));
 		//si c est un  lien symbolique ecrire le lien;
 	}
 	ft_putchar('\n');
