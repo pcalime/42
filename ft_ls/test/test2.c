@@ -6,7 +6,7 @@
 /*   By: pcalime <pcalime@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 22:47:15 by pcalime           #+#    #+#             */
-/*   Updated: 2016/06/16 03:50:24 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/06/18 00:16:40 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,18 @@ static void	ft_kind_file(struct stat file_stat)
 {
 	if (S_ISDIR(file_stat.st_mode))
 		ft_putchar('d');
+	else if (S_ISREG(file_stat.st_mode))
+		ft_putchar('-');
 	else if (S_ISLNK(file_stat.st_mode))
 		ft_putchar('l');
+	else if (S_ISCHR(file_stat.st_mode))
+		ft_putchar('c');
+	else if (S_ISBLK(file_stat.st_mode))
+		ft_putchar('b');
+	else if (S_ISFIFO(file_stat.st_mode))
+		ft_putchar('p');
 	else
-		ft_putchar('-');
+		ft_putchar('s');
 }
 
 void	ft_affiche_modes(struct stat file_stat)
@@ -123,9 +131,10 @@ void	cut_time(time_t time_f)
 void	affiche_l(struct stat file_stat, char *name, t_print size_print)
 {
 	char	buf2[1024];
-	ssize_t nb2;
+	char	buf1[1024];
 
 	ft_bzero(buf2, sizeof(buf2));
+	ft_bzero(buf1, sizeof(buf1));
 
 
 	ft_affiche_modes(file_stat);
@@ -139,13 +148,21 @@ void	affiche_l(struct stat file_stat, char *name, t_print size_print)
 	cut_time(file_stat.st_mtime);
 	ft_putchar(' ');
 	ft_putnstr(name, -2);
+
+// CREER UNE AUTRE FONCTION APRES AFFICHE_L
+
+/*
 	if (S_ISLNK(file_stat.st_mode))
 	{
 		ft_putstr(" -> ");
-		nb2 = readlink("/private/tmp/munki_swupd_cache", buf2, 1023);
-		write(1, buf2, ft_strlen(buf2));
+		getcwd(buf1, 1023);
+		//ft_putstr(buf1);
+		readlink("/tmp", buf2, 1023);
+		write(1, buf2, 1024);//ft_strlen(buf2));
 		//si c est un  lien symbolique ecrire le lien;
 	}
+	*/
+////////////////////////////////////////////////////////
 	ft_putchar('\n');
 }
 
@@ -182,8 +199,9 @@ void	affiche_total(t_print siz_prt)
 								//A FAIRE !!!
 /* 	faire les modes (a peaufiner(is_dir, is_etc ..))
 	-R (faut le faire)!!!!!!
-	le parsing (ca a l aire plutot bon)
+	le parsing (ca a l aire plutot bon)(quand y a des dossier et fichier les mettre separement)
 	liens symboliques -l (affiche_l faut rajouter le lien(trouver le path complet))
+	gestion d erreur
 
 *//////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -193,6 +211,7 @@ int		main(int argc, char **argv)
 		ft_ls1();
 	else
 		ft_ls2(argc, argv);
+	return (0);
 }
 
 /*
