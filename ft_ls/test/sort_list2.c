@@ -6,21 +6,30 @@
 /*   By: pcalime <pcalime@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/11 02:20:42 by pcalime           #+#    #+#             */
-/*   Updated: 2016/05/17 06:01:36 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/06/18 04:51:20 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void	sort_arg(int argc, char **argv, int cmpt) // a faire
+void	sort_arg(int argc, char **argv, int cmpt) //check les arg puis trier par dossier ou pas puis trier par strcmp
 {
-	char	**ret;
+	char **lol;
 
-	while (cmpt < argc)
-	{
-		ret = argv;
-		cmpt++;
-	}
+	lol = argv;
+	argc = cmpt;
+//	char	*swap;
+//	int		cmpt2;
+//
+//	cmpt2 = cmpt;
+//	while (cmpt < argc - 1)
+//	{
+//		if (ft_strcmp(argv[cmpt], argv[cmpt + 1]) > 0)
+//		{
+//
+//		}
+//		cmpt++;
+//	}
 }
 
 void	reverse_list(t_list **begin_list)

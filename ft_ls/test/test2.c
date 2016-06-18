@@ -6,7 +6,7 @@
 /*   By: pcalime <pcalime@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 22:47:15 by pcalime           #+#    #+#             */
-/*   Updated: 2016/06/18 00:16:40 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/06/18 00:40:25 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,8 +197,7 @@ void	affiche_total(t_print siz_prt)
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 								//A FAIRE !!!
-/* 	faire les modes (a peaufiner(is_dir, is_etc ..))
-	-R (faut le faire)!!!!!!
+/* 	-R (faut le faire)!!!!!!
 	le parsing (ca a l aire plutot bon)(quand y a des dossier et fichier les mettre separement)
 	liens symboliques -l (affiche_l faut rajouter le lien(trouver le path complet))
 	gestion d erreur
