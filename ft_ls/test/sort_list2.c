@@ -6,7 +6,7 @@
 /*   By: pcalime <pcalime@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/11 02:20:42 by pcalime           #+#    #+#             */
-/*   Updated: 2016/06/18 04:51:20 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/06/21 04:35:58 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,28 @@
 
 void	sort_arg(int argc, char **argv, int cmpt) //check les arg puis trier par dossier ou pas puis trier par strcmp
 {
-	char **lol;
+	struct stat	file_stat;
 
-	lol = argv;
-	argc = cmpt;
-//	char	*swap;
-//	int		cmpt2;
-//
-//	cmpt2 = cmpt;
-//	while (cmpt < argc - 1)
-//	{
-//		if (ft_strcmp(argv[cmpt], argv[cmpt + 1]) > 0)
-//		{
-//
-//		}
-//		cmpt++;
-//	}
+	while (cmpt < argc)
+	{
+		if (lstat(argv[cmpt], &file_stat) == -1)
+		{
+			//mettre dans erreur;
+		}
+		else
+		{
+			if (S_ISDIR(file_stat.st_mode))
+			{
+				//mettre dans dir
+			}
+			else
+			{
+				//mettre dans other
+			}
+		}
+		cmpt++;
+
+	}
 }
 
 void	reverse_list(t_list **begin_list)

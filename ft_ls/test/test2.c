@@ -6,7 +6,7 @@
 /*   By: pcalime <pcalime@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 22:47:15 by pcalime           #+#    #+#             */
-/*   Updated: 2016/06/18 00:40:25 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/06/20 23:31:17 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,8 +126,7 @@ void	cut_time(time_t time_f)
 	ft_putchar(' ');
 	ft_putstr(&aff[4]);
 }
-#include <sys/types.h>
-#include <sys/xattr.h>
+
 void	affiche_l(struct stat file_stat, char *name, t_print size_print)
 {
 	char	buf2[1024];
