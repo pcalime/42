@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_convert_int_to_bit.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcalime <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: pcalime <pcalime@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/21 20:05:00 by pcalime           #+#    #+#             */
-/*   Updated: 2016/03/21 20:13:53 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/06/23 01:02:23 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*convert_int_to_bit(int nbr)
 		return (ft_strdup("0"));
 	cmpt = 0;
 	while (cmpt < 32)
-	{	
+	{
 		tmp[cmpt] = nbr % 2 + 48;
 		nbr /= 2;
 		cmpt++;

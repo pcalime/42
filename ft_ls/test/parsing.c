@@ -6,7 +6,7 @@
 /*   By: pcalime <pcalime@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/06 04:27:24 by pcalime           #+#    #+#             */
-/*   Updated: 2016/05/17 09:21:04 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/06/23 02:47:18 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_opts	*init_options()
 	ret = ft_memalloc(sizeof(t_opts));
 	ret->a = 0;
 	ret->r = 0;
-	ret->R = 0;
+	ret->big_r = 0;
 	ret->l = 0;
 	ret->t = 0;
 	return (ret);
@@ -45,7 +45,7 @@ void	affiche_dir(char *str, t_opts *options, int mult_dir)
 		if (options->a == 0 && str_dir->d_name[0] == '.')
 			mult_dir = mult_dir + 1 - 1;
 		else
-			max_t_print(&siz_prt, sort_list(&begin_list, str_dir, str));
+			max_t_print(&siz_prt, sort_list(&begin_list, str_dir->d_name, str));
 	}
 	if (options->t == 1)
 		sort_time(&begin_list);
@@ -81,7 +81,7 @@ void	ft_ls1()
 	while ((str_dir = readdir(directory)) != NULL)
 	{
 		if (str_dir->d_name[0] != '.')
-			sort_list(&begin_list, str_dir, ".");
+			sort_list(&begin_list, str_dir->d_name, ".");
 	}
 	while (begin_list != NULL)
 	{
@@ -165,7 +165,7 @@ void	ft_parse_opt(char *str, t_opts *options)
 		else if (str[cmpt] == 'r')
 			options->r = 1;
 		else if (str[cmpt] == 'R')
-			options->R = 1;
+			options->big_r = 1;
 		else if (str[cmpt] == 'l')
 			options->l = 1;
 		else if (str[cmpt] == 't')

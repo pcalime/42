@@ -6,7 +6,7 @@
 /*   By: pcalime <pcalime@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/06 03:19:16 by pcalime           #+#    #+#             */
-/*   Updated: 2016/06/16 00:57:51 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/06/22 23:17:07 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ t_print	fill_print(struct stat file_stat)
 	return (ret);
 }
 
-static void		sort_list2(t_list *tmp, t_list *new_ele, struct dirent *str_dir)
+static void		sort_list2(t_list *tmp, t_list *new_ele, char *name_dir)
 {
 	t_list	*tmp2;
 
@@ -82,7 +82,7 @@ static void		sort_list2(t_list *tmp, t_list *new_ele, struct dirent *str_dir)
 			tmp->next = new_ele;
 			return ;
 		}
-		else if (strcmp(tmp->next->name, str_dir->d_name) > 0)
+		else if (strcmp(tmp->next->name, name_dir) > 0)
 		{
 			tmp2 = tmp->next;
 			tmp->next = new_ele;
@@ -93,14 +93,14 @@ static void		sort_list2(t_list *tmp, t_list *new_ele, struct dirent *str_dir)
 	}
 }
 
-t_print			sort_list(t_list **beg_list, struct dirent *str_dir, char *prev)
+t_print			sort_list(t_list **beg_list, char *name_dir, char *prev)
 {
 	t_list	*new_elem;
 	t_list	*tmp;
 	t_print	ret;
 
 	new_elem = create_new_elem();
-	new_elem->name = str_dir->d_name;
+	new_elem->name = name_dir;
 	if (lstat(ft_join(prev, new_elem->name), &new_elem->file_stat) == -1)
 	{
 		perror("error ");
@@ -113,12 +113,12 @@ t_print			sort_list(t_list **beg_list, struct dirent *str_dir, char *prev)
 		return (ret);
 	}
 	tmp = *beg_list;
-	if (strcmp(tmp->name, str_dir->d_name) > 0)
+	if (strcmp(tmp->name, name_dir) > 0)
 	{
 		*beg_list = new_elem;
 		new_elem->next = tmp;
 		return (ret);
 	}
-	sort_list2(tmp, new_elem, str_dir);
+	sort_list2(tmp, new_elem, name_dir);
 	return (ret);
 }

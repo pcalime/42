@@ -6,7 +6,7 @@
 /*   By: pcalime <pcalime@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 23:42:19 by pcalime           #+#    #+#             */
-/*   Updated: 2016/05/17 07:22:06 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/06/23 01:41:01 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct		s_opts
 	int				a;
 	int				r;
 	int				t;
-	int				R;
+	int				big_r;
 }					t_opts;
 
 void	init_t_print(t_print *ini);
@@ -56,7 +56,7 @@ void	ft_ls1();
 void	ft_ls2(int argc, char **argv);
 t_opts	*init_options();
 void	ft_parse_opt(char *str, t_opts *options);
-t_print	sort_list(t_list **begin_list, struct dirent *str_dir, char *previous);
+t_print	sort_list(t_list **begin_list, char *name_dir /*struct dirent *str_dir*/, char *previous);
 t_list	*create_new_elem(void);
 int		size_of_int(int nbr);
 void	reverse_list(t_list **begin_list);
