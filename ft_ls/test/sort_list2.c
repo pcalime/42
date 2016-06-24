@@ -6,7 +6,7 @@
 /*   By: pcalime <pcalime@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/11 02:20:42 by pcalime           #+#    #+#             */
-/*   Updated: 2016/06/23 04:41:15 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/06/24 23:16:05 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,35 +14,34 @@
 
 //malloc un char **
 //trie par ordre alphabetique puis find et remplir les erreur les non-dossier et mettre le reste(dossier);
-static char **sort_arg2(char **argv, int size, int cmpt)
+static char **sort_arg2(char **argv, int argc)
 {
-	char	**ret;
+	int		cmpt;
 	int		cmpt2;
-	int		cmpt3;
-	char	*min;
+	char	*swap;
 
-	ret = (char **)ft_memalloc(sizeof(char *) * (size + 1));
+	cmpt = 1;
+	if (argv[1][0] == '-')
+		cmpt++;
 	cmpt2 = cmpt;
-	cmpt3 = 0;
-	while (cmpt3 < size - 1)
+	while (cmpt + 1 < argc)
 	{
-		min = argv[cmpt];
-		while (cmpt < size - 1)
+		if (ft_strcmp(argv[cmpt2], argv[cmpt + 1]) > 0)
 		{
-			if (argv[cmpt + 1] != NULL)
-			{
-				if (ft_strcmp(argv[cmpt + 1], min) < 0)
-				{
-					min = argv[cmpt + 1];
-					argv[cmpt + 1] = NULL;
-				}
-			}
-			cmpt++;
+			swap = argv[cmpt2];
+			argv[cmpt2] = argv[cmpt + 1];
+			argv[cmpt + 1] = swap;
+			cmpt = cmpt2;
 		}
-		cmpt = cmpt2;
-		cmpt3++;
+		else
+			cmpt++;
+		if (cmpt + 1 == argc)
+		{
+			cmpt2++;
+			cmpt = cmpt2;
+		}
 	}
-	return (ret);
+	return (argv);
 }
 
 void	sort_arg(int argc, char **argv, int cmpt) //check les arg puis trier par dossier ou pas puis trier par strcmp
@@ -53,9 +52,9 @@ void	sort_arg(int argc, char **argv, int cmpt) //check les arg puis trier par do
 	char 		**argv_sort;
 
 	argv_sort = (char **)ft_memalloc(sizeof(char *) * (argc - cmpt + 1));
-	argv = sort_arg2(argv, argc - cmpt, cmpt);
+	argv_sort = sort_arg2(argv, argc);
 	cmpt2 = cmpt;
-	cmpt3 = 0;
+	cmpt3 = cmpt;
 	while (cmpt < argc)
 	{
 		if (lstat(argv[cmpt], &file_stat) == 1)
