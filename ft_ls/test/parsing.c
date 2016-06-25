@@ -6,7 +6,7 @@
 /*   By: pcalime <pcalime@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/06 04:27:24 by pcalime           #+#    #+#             */
-/*   Updated: 2016/06/23 02:47:18 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/06/25 02:13:16 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,8 +113,8 @@ void	ft_ls2(int argc, char **argv)
 		affiche_dir(".", options, 0);
 		return ;
 	}
-	sort_arg(argc, argv, cmpt);
-	while (cmpt < argc)
+	sort_arg(argc, argv, cmpt, options);
+	while (cmpt < argc)	//la mettre dans sort_arg comme sa je fais tout dirctement
 	{
 		lstat (argv[cmpt], &file_stat);
 		if (S_ISDIR(file_stat.st_mode))

@@ -6,7 +6,7 @@
 /*   By: pcalime <pcalime@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 23:42:19 by pcalime           #+#    #+#             */
-/*   Updated: 2016/06/23 01:41:01 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/06/25 02:12:56 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ typedef struct		s_opts
 }					t_opts;
 
 void	init_t_print(t_print *ini);
-void	sort_arg(int argc, char **argv, int cmpt);
+void	sort_arg(int argc, char **argv, int cmpt, t_opts *options);
 void	ft_ls1();
 void	ft_ls2(int argc, char **argv);
 t_opts	*init_options();
