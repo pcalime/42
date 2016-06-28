@@ -6,7 +6,7 @@
 /*   By: pcalime <pcalime@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 23:42:19 by pcalime           #+#    #+#             */
-/*   Updated: 2016/06/25 02:12:56 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/06/27 22:17:45 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,6 @@ void	affiche_l(struct stat file_stat, char *name, t_print size_print);
 void	affiche_total(t_print siz_prt);
 void	max_t_print(t_print *max, t_print new);
 t_print	fill_print(struct stat file_stat);
+void	affiche_dir(char *str, t_opts *options, int mult_dir);
 
 #endif

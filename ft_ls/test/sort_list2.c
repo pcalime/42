@@ -6,7 +6,7 @@
 /*   By: pcalime <pcalime@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/11 02:20:42 by pcalime           #+#    #+#             */
-/*   Updated: 2016/06/25 02:13:10 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/06/28 05:13:33 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ void	check_error(int argc, char **argv)
 		{
 			ft_putstr("ft: ");
 			perror(argv[cmpt]);
-			ft_putchar('\n');
 		}
 		cmpt++;
 	}
@@ -66,10 +65,22 @@ void	check_error(int argc, char **argv)
 
 void	affiche_file(t_list *begin_list, t_opts *options, t_print siz_prt)
 {
-
+	if (options->t == 1)
+		sort_time(&begin_list);
+	if (options->r == 1)
+		reverse_list(&begin_list);
+	while(begin_list != NULL)
+	{
+		ft_putstr("frfrf");
+		if (options->l == 1)
+			affiche_l(begin_list->file_stat, begin_list->name, siz_prt);
+		else
+			ft_putendl(begin_list->name);
+		begin_list = begin_list->next;
+	}
 }
 
-void	check_file(int argc, char **argv, t_opts *options, t_print siz_prt) 
+void	check_file(int argc, char **argv, t_opts *options, t_print siz_prt)
 {
 	t_list		*begin_list;
 	t_list		*new_elem;
@@ -81,13 +92,13 @@ void	check_file(int argc, char **argv, t_opts *options, t_print siz_prt)
 	if (argv[1][0] == '-')
 		cmpt++;
 	begin_list = NULL;
-	init_t_print(&siz_prt);
 	while (cmpt < argc)
 	{
 		if (lstat(argv[cmpt], &file_stat) != -1)
 		{
-			if (S_ISDIR(file_stat.st_mode) == 0) // ajouter le max_t_print
+			if (S_ISDIR(file_stat.st_mode) == 0)
 			{
+				max_t_print(&siz_prt, fill_print(file_stat));
 				new_elem = create_new_elem();
 				if (begin_list == NULL)
 					begin_list = new_elem;
@@ -101,10 +112,57 @@ void	check_file(int argc, char **argv, t_opts *options, t_print siz_prt)
 		cmpt++;
 	}
 	affiche_file(begin_list, options, siz_prt);
-	//afficher avec les options
 }
 
-void	sort_arg(int argc, char **argv, int cmpt, t_opts *options)
+void	aff_check_dir(t_list *begin_list, t_opts *options, int mult_dir)
+{
+	if (options->t == 1)
+		sort_time(&begin_list);
+	if (options->r == 1)
+		reverse_list(&begin_list);
+	while (begin_list != NULL)
+	{
+		ft_putchar('\n');
+		affiche_dir(begin_list->name, options, mult_dir);
+		begin_list = begin_list->next;
+	}
+}
+
+void	check_dir(int argc, char **argv, t_opts *options, int mult_dir)
+{
+	t_list		*begin_list;
+	t_list		*new_elem;
+	t_list		*tmp;
+	int			cmpt;
+	struct stat	file_stat;
+
+	cmpt = 1;
+	if (argv[1][0] == '-')
+		cmpt++;
+	begin_list = NULL;
+	while (cmpt < argc)
+	{
+		if (lstat(argv[cmpt], &file_stat) != -1)
+		{
+			if (S_ISDIR(file_stat.st_mode) == 1)
+			{
+				new_elem = create_new_elem();
+				if (begin_list == NULL)
+					begin_list = new_elem;
+				else
+					tmp->next = new_elem;
+				new_elem->name = argv[cmpt];
+				new_elem->file_stat = file_stat;
+				tmp = new_elem;
+			}
+		}
+		cmpt++;
+	}
+	cmpt = 1;
+	aff_check_dir(begin_list, options, mult_dir);
+}
+
+void	sort_arg(int argc, char **argv, int mult_dir, t_opts *options)
 {
 	//struct stat	file_stat;
 	char		**argv_sort;
@@ -112,55 +170,13 @@ void	sort_arg(int argc, char **argv, int cmpt, t_opts *options)
 
 	init_t_print(&siz_prt);
 	argv_sort = sort_arg2(argv, argc);
-	cmpt = 0;
+	check_error(argc, argv);
 	check_file(argc, argv, options, siz_prt);
-	/*
-	struct stat	file_stat;
-	int			cmpt2;
-	int			cmpt3;
-	char 		**argv_sort;
-
-	argv_sort = (char **)ft_memalloc(sizeof(char *) * (argc - cmpt + 1));
-	argv_sort = sort_arg2(argv, argc);
-	cmpt2 = cmpt;
-	cmpt3 = cmpt;
-	while (cmpt < argc)
-	{
-		if (lstat(argv[cmpt], &file_stat) == -1)
-		{
-			argv_sort[cmpt3] = argv[cmpt];
-			cmpt3++;
-		}
-		cmpt++;
-	}
-	cmpt = cmpt2;
-	while (cmpt < argc)
-	{
-		if (lstat(argv[cmpt], &file_stat) != -1)
-		{
-			if (!S_ISDIR(file_stat.st_mode))
-			{
-				argv_sort[cmpt3] = argv[cmpt];
-				cmpt3++;
-			}
-		}
-		cmpt++;
-	}
-	cmpt = cmpt2;
-	while (cmpt < argc)
-	{
-		if (lstat(argv[cmpt], &file_stat) != -1)
-		{
-			if (S_ISDIR(file_stat.st_mode))
-			{
-				argv_sort[cmpt3] = argv[cmpt];
-				cmpt3++;
-			}
-		}
-		cmpt++;
-	}
-	argv = argv_sort;*/
+	check_dir(argc, argv, options, mult_dir);
 }
+
+
+
 
 void	reverse_list(t_list **begin_list)
 {
@@ -179,7 +195,7 @@ void	reverse_list(t_list **begin_list)
 	}
 	*begin_list = previous;
 }
-
+/*
 void	sort_time2(t_list *tmp_beg, t_list *new_beg_list)
 {
 	t_list	*tmp;
@@ -203,16 +219,20 @@ void	sort_time2(t_list *tmp_beg, t_list *new_beg_list)
 		tmp = tmp->next;
 	}
 }
-
-void	sort_time(t_list **begin_list)
+*/
+void	sort_time(t_list **begin_list) // a faire
 {
-	t_list	*new_beg_list;
+	t_list	*tmp;
+	t_list	*new_elem;
+
+
+	/*t_list	*new_beg_list;
 	t_list	*tmp_beg;
 	t_list	*tmp;
 	t_list	*new_elem;
 
 	tmp_beg = *begin_list;
-	while (tmp_beg != NULL)
+	while (tmp_beg->next != NULL)
 	{
 		new_elem = create_new_elem();
 		new_elem->name = tmp_beg->name;
@@ -235,5 +255,5 @@ void	sort_time(t_list **begin_list)
 		}
 		tmp_beg = tmp_beg->next;
 	}
-	*begin_list = new_beg_list;
+	*begin_list = new_beg_list;*/
 }

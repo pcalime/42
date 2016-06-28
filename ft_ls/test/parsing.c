@@ -6,7 +6,7 @@
 /*   By: pcalime <pcalime@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/06 04:27:24 by pcalime           #+#    #+#             */
-/*   Updated: 2016/06/25 02:13:16 by pcalime          ###   ########.fr       */
+/*   Updated: 2016/06/27 22:14:13 by pcalime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	ft_ls1()
 void	ft_ls2(int argc, char **argv)
 {
 	t_opts		*options;
-	struct stat	file_stat;
+	//struct stat	file_stat;
 	int			cmpt;
 	t_print		siz_prt;
 	int			mult_dir;
@@ -113,8 +113,8 @@ void	ft_ls2(int argc, char **argv)
 		affiche_dir(".", options, 0);
 		return ;
 	}
-	sort_arg(argc, argv, cmpt, options);
-	while (cmpt < argc)	//la mettre dans sort_arg comme sa je fais tout dirctement
+	sort_arg(argc, argv, mult_dir, options);
+	/*while (cmpt < argc)	//la mettre dans sort_arg comme sa je fais tout dirctement
 	{
 		lstat (argv[cmpt], &file_stat);
 		if (S_ISDIR(file_stat.st_mode))
@@ -130,22 +130,8 @@ void	ft_ls2(int argc, char **argv)
 		cmpt++;
 		if (cmpt < argc)
 			ft_putchar('\n');
-	}
+	}*/
 }
-
-
-/*
-argc = 1
-liste sans options du dossier present
-
-argc = 2
-sois argv[1] = options -> liste avec options du dossier present;
-sois argv[1] = dossier -> liste sans options du dossier en paramatre; warning fichier
-
-argc >= 3
-sois argv[1] = options -> liste du dossier en parametre (argv[2] (ou plus)) avec les options
-sois argv[1] = dossier -> liste des n dossier sans parametre;
-*/
 
 
 void	ft_parse_opt(char *str, t_opts *options)
